@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2222856595397062073}
   - component: {fileID: 2222856595399961731}
   - component: {fileID: 2222856595399019453}
-  - component: {fileID: 2222856595394757099}
   - component: {fileID: 2222856594490898373}
   - component: {fileID: 2222856594490898370}
   - component: {fileID: 2211321867075976217}
+  - component: {fileID: -6326647122222263185}
   m_Layer: 0
   m_Name: ChristmasTree
   m_TagString: Untagged
@@ -82,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2222856595394757099
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2222856595396697035}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: d610123bf820bda4892639ab406a04af, type: 3}
 --- !u!54 &2222856594490898373
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,3 +129,16 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 2.631}
   - Lane: 2
     Position: {x: 0.5, y: 0, z: 2.631}
+--- !u!65 &-6326647122222263185
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222856595396697035}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0766904, y: 3.5992646, z: 2.0520847}
+  m_Center: {x: -0.0031912327, y: 1.7574284, z: -0.0015854238}
