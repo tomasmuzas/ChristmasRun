@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2222856595394757099}
   - component: {fileID: 2222856594490898373}
   - component: {fileID: 2222856594490898370}
+  - component: {fileID: 2211321867075976217}
   m_Layer: 0
   m_Name: ChristmasTree
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2222856595396697035}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.31965345, y: 3.040919e-17, z: 1.2341092}
+  m_LocalPosition: {x: -0.01, y: -0, z: 2.631}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,3 +124,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a9b801c0461074cb60632c5740613f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2211321867075976217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222856595396697035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58bb666eee04904497858f74ebfe8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPositions:
+  - Lane: 1
+    Position: {x: 0, y: 0, z: 0}
