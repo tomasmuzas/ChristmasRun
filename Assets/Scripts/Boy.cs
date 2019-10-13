@@ -8,7 +8,7 @@ public class Boy : MonoBehaviour
     private bool _jumping;
     public float JumpHeight;
     public float MovementDelta;
-
+    public AudioSource jump;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,8 @@ public class Boy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         _jumping = rigidbody.velocity != Vector3.zero;
         if (Input.GetKeyDown("right") && lane != Lane.Right && !_jumping)
         {
@@ -33,6 +35,7 @@ public class Boy : MonoBehaviour
         if (Input.GetKeyDown("up") && !_jumping)
         {
             rigidbody.velocity = new Vector3(0, JumpHeight, 0);
+            jump.Play();
         }
     }
 }
