@@ -1,7 +1,4 @@
 ﻿using Assets.Scripts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Boy : MonoBehaviour
@@ -9,6 +6,8 @@ public class Boy : MonoBehaviour
     private Rigidbody rigidbody;
     private Lane lane;
     private bool _jumping;
+    public float JumpHeight;
+    public float MovementDelta;
 
     // Start is called before the first frame update
     void Start()
@@ -23,17 +22,17 @@ public class Boy : MonoBehaviour
         _jumping = rigidbody.velocity != Vector3.zero;
         if (Input.GetKeyDown("right") && lane != Lane.Right && !_jumping)
         {
-            transform.position += new Vector3(1, 0, 0);
+            transform.position += new Vector3(MovementDelta, 0, 0);
             lane++;
         }
         if (Input.GetKeyDown("left") && lane != Lane.Left && !_jumping) 
         {
-            transform.position += new Vector3(-1, 0, 0);
+            transform.position += new Vector3(-MovementDelta, 0, 0);
             lane--;
         }
         if (Input.GetKeyDown("up") && !_jumping)
         {
-            rigidbody.velocity = new Vector3(0, 4, 0);
+            rigidbody.velocity = new Vector3(0, JumpHeight, 0);
         }
     }
 }
