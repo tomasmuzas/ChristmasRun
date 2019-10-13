@@ -108,7 +108,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -137,5 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPositions:
+  - Lane: 0
+    Position: {x: -0.5, y: 0, z: 2.631}
   - Lane: 1
-    Position: {x: 0, y: 0, z: 0}
+    Position: {x: 0, y: 0, z: 2.631}
+  - Lane: 2
+    Position: {x: 0.5, y: 0, z: 2.631}
