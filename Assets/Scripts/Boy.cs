@@ -39,4 +39,9 @@ public class Boy : MonoBehaviour
             jump.Play();
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        EventManager.PublishObjectCollision();
+    }
 }

@@ -12,14 +12,20 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventManager.OnObjectCollision += StopGame;
         GameSpeed = InitialGameSpeed;
-        InvokeRepeating("SpawnObject", SpawnSpeed, SpawnSpeed);
+        InvokeRepeating(nameof(SpawnObject), SpawnSpeed, SpawnSpeed);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnObjectCollision -= StopGame;
     }
 
     void SpawnObject()
@@ -29,5 +35,10 @@ public class GameManager : MonoBehaviour
             var location = SpawnablePrefab.SpawnPositions[Rnd.Next(0, SpawnablePrefab.SpawnPositions.Count)];
             Instantiate(SpawnablePrefab, location.Position, Quaternion.identity);
         }
+    }
+
+    void StopGame()
+    {
+        CancelInvoke(nameof(SpawnObject));
     }
 }
