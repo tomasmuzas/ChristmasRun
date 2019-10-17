@@ -131,8 +131,8 @@ GameObject:
   - component: {fileID: 88488815}
   - component: {fileID: 88488814}
   - component: {fileID: 88488813}
-  - component: {fileID: 88488812}
   - component: {fileID: 88488816}
+  - component: {fileID: 88488812}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -140,20 +140,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &88488812
-MeshCollider:
+--- !u!65 &88488812
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88488811}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 37ddd7aaa80127e4ba1d729377d17e9c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Size: {x: 10, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &88488813
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -372,7 +371,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276448429}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 37ddd7aaa80127e4ba1d729377d17e9c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 25.839327
@@ -395,7 +394,6 @@ MonoBehaviour:
   MovementDelta: 0.5
   MovementTime: 0.5
   jump: {fileID: 276448434}
-  horizontalVelocity: 0
 --- !u!54 &276448433
 Rigidbody:
   m_ObjectHideFlags: 0
