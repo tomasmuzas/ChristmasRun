@@ -393,7 +393,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpHeight: 4
   MovementDelta: 0.5
+  MovementTime: 0.5
   jump: {fileID: 276448434}
+  horizontalVelocity: 0
 --- !u!54 &276448433
 Rigidbody:
   m_ObjectHideFlags: 0
