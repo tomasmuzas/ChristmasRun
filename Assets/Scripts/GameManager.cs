@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.EventHandling;
+using Assets.Scripts.Events;
+using UnityEngine;
 using Random = System.Random;
 
 public class GameManager : MonoBehaviour
@@ -7,25 +9,16 @@ public class GameManager : MonoBehaviour
     public float SpawnSpeed;
     public static float GameSpeed;
     public Spawnable SpawnablePrefab;
-    public static Random Rnd = new Random();
+    public GameObject GameOverText;
+    private static readonly Random Rnd = new Random();
+    private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
 
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.OnObjectCollision += StopGame;
+        _collisionHandler.EventAction += HandleCollisionHappened;
         GameSpeed = InitialGameSpeed;
         InvokeRepeating(nameof(SpawnObject), SpawnSpeed, SpawnSpeed);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnDisable()
-    {
-        EventManager.OnObjectCollision -= StopGame;
     }
 
     void SpawnObject()
@@ -37,8 +30,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void StopGame()
+    private void HandleCollisionHappened(CollisionHappenedEvent @event)
     {
         CancelInvoke(nameof(SpawnObject));
+        GameOverText.SetActive(true);
+        Time.timeScale = 0;
     }
 }

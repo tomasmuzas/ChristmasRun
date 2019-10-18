@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Assets.Scripts;
+using Assets.Scripts.Events;
 using UnityEngine;
 
 public class Boy : MonoBehaviour
@@ -12,7 +13,6 @@ public class Boy : MonoBehaviour
     public float JumpHeight;
     public float MovementDelta;
     public float MovementTime;
-    public AudioSource jump;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class Boy : MonoBehaviour
         if (Input.GetKeyDown("up") && !_jumping)
         {
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, JumpHeight, 0);
-            jump.Play();
+            EventManager.PublishEvent(new PlayerJumpedEvent());
         }
     }
 
@@ -55,6 +55,10 @@ public class Boy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        EventManager.PublishObjectCollision();
+        EventManager.PublishEvent(new CollisionHappenedEvent
+        {
+            Object = GetComponent<Collider>(),
+            CollidedWith = other
+        });
     }
 }

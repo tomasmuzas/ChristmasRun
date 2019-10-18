@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TextAppear : MonoBehaviour
 {
@@ -8,18 +6,6 @@ public class TextAppear : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(false);
-        EventManager.OnObjectCollision += ShowText;
-    }
-
-    void OnDisable()
-    {
-        EventManager.OnObjectCollision -= ShowText;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void ShowText()
