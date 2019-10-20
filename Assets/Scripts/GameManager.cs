@@ -2,6 +2,7 @@
 using Assets.Scripts.EventHandling;
 using Assets.Scripts.Events;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class GameManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     private static readonly Random Rnd = new Random();
     private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
 
+    private int Points;
+    public Text PointsText;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +31,13 @@ public class GameManager : MonoBehaviour
         _collisionHandler.EventAction += HandleCollisionHappened;
         GameSpeed = InitialGameSpeed;
         InvokeRepeating(nameof(SpawnObject), SpawnSpeed, SpawnSpeed);
+        InvokeRepeating("AddPoints", 0f, GameSpeed * 20);
     }
 
+    void Update()
+    {
+        SetPointsText();   
+    }
     void SpawnObject()
     {
         if (SpawnablePrefabs?.Count > 0)
@@ -48,5 +56,15 @@ public class GameManager : MonoBehaviour
         CancelInvoke(nameof(SpawnObject));
         GameOverText.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    void SetPointsText()
+    {
+        PointsText.text = $"Score: {Points}";
+    }
+
+    void AddPoints()
+    {
+        Points++;
     }
 }
