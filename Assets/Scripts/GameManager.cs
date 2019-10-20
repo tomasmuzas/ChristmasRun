@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnObject", SpawnSpeed, SpawnSpeed);
         Points = 0;
         SetPointsText();
-        InvokeRepeating("AddPoints", 0f, PointsSpeed);
+        InvokeRepeating("AddPoints", 0f, GameSpeed*20);
     }
 
     // Update is called once per frame
