@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.19488236, g: 0.5014808, b: 0.60871625, a: 1}
+  m_IndirectSpecularColor: {r: 0.19470608, g: 0.50118583, b: 0.6086816, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0200646ca1db34b95132b6edbc1af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 0}
 --- !u!1001 &276448428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,7 +342,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c79e889f35f17c4409e37059ec62179a, type: 2}
+  - {fileID: -3033667219593020291, guid: 3c314ae6a844d474aa6a39ac801121fc, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -393,6 +392,7 @@ MonoBehaviour:
   JumpHeight: 4
   MovementDelta: 0.5
   MovementTime: 0.5
+  Plane: {fileID: 88488811}
 --- !u!54 &276448433
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1112,9 +1112,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialGameSpeed: 0.01
   SpawnSpeed: 3
-  SpawnablePrefab: {fileID: 2211321867075976217, guid: 7c7be2aabbca3ee40af6a6c9ad72061b,
-    type: 3}
+  SpawnablePrefabs:
+  - {fileID: 2211321867075976217, guid: 7c7be2aabbca3ee40af6a6c9ad72061b, type: 3}
+  - {fileID: 6394236180661077827, guid: 57dbb285e6f414847b9561472ae3ebe5, type: 3}
   GameOverText: {fileID: 1037758611}
+  MainCharacter: {fileID: 276448429}
 --- !u!4 &1693387594
 Transform:
   m_ObjectHideFlags: 0

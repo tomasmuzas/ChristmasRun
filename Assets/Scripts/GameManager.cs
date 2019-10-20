@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.EventHandling;
+﻿using System.Collections.Generic;
+using Assets.Scripts.EventHandling;
 using Assets.Scripts.Events;
 using UnityEngine;
 using Random = System.Random;
@@ -8,14 +9,22 @@ public class GameManager : MonoBehaviour
     public float InitialGameSpeed;
     public float SpawnSpeed;
     public static float GameSpeed;
-    public Spawnable SpawnablePrefab;
+    [SerializeField]
+    public List<Spawnable> SpawnablePrefabs;
     public GameObject GameOverText;
+    public GameObject MainCharacter;
+    public static GameManager Instance { get; private set; } // static singleton
+
     private static readonly Random Rnd = new Random();
     private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
 
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance == null) { Instance = this; }
+        else { Destroy(gameObject); }
+        // Cache references to all desired variables
+        MainCharacter = FindObjectOfType<MainCharacter>().gameObject;
         _collisionHandler.EventAction += HandleCollisionHappened;
         GameSpeed = InitialGameSpeed;
         InvokeRepeating(nameof(SpawnObject), SpawnSpeed, SpawnSpeed);
@@ -23,10 +32,14 @@ public class GameManager : MonoBehaviour
 
     void SpawnObject()
     {
-        if (SpawnablePrefab?.SpawnPositions?.Count > 0)
+        if (SpawnablePrefabs?.Count > 0)
         {
-            var location = SpawnablePrefab.SpawnPositions[Rnd.Next(0, SpawnablePrefab.SpawnPositions.Count)];
-            Instantiate(SpawnablePrefab, location.Position, Quaternion.identity);
+            var spawnablePrefab = SpawnablePrefabs[Rnd.Next(0, SpawnablePrefabs.Count)];
+            if (spawnablePrefab.SpawnPositions?.Count > 0)
+            {
+                var location = spawnablePrefab.SpawnPositions[Rnd.Next(0, spawnablePrefab.SpawnPositions.Count)];
+                Instantiate(spawnablePrefab, location.Position, Quaternion.identity);
+            }
         }
     }
 

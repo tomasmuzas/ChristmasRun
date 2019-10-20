@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
 
+[Serializable]
 public class Spawnable : MonoBehaviour
 {
     [SerializeField]
