@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Behaviour;
 using Assets.Scripts.EventHandling;
 using Assets.Scripts.Events;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = System.Random;
+using Text = TMPro.TextMeshProUGUI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,9 +19,12 @@ public class GameManager : MonoBehaviour
 
     private static readonly Random Rnd = new Random();
     private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
+    private readonly EventHandler<GiftCollectedEvent> _giftHandler = new EventHandler<GiftCollectedEvent>();
 
-    private int Points;
+    private int Points = 0;
     public Text PointsText;
+    private int Gifts = 0;
+    public Text GiftsText;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +33,11 @@ public class GameManager : MonoBehaviour
         // Cache references to all desired variables
         MainCharacter = FindObjectOfType<MainCharacter>().gameObject;
         _collisionHandler.EventAction += HandleCollisionHappened;
+        _giftHandler.EventAction += HandleGiftCollected;
         GameSpeed = InitialGameSpeed;
         InvokeRepeating(nameof(SpawnObject), SpawnSpeed, SpawnSpeed);
-        InvokeRepeating("AddPoints", 0f, GameSpeed * 20);
+        InvokeRepeating(nameof(AddPoints), 0f, GameSpeed * 20);
+        GiftsText.text = Gifts.ToString();
     }
 
     void Update()
@@ -53,14 +59,31 @@ public class GameManager : MonoBehaviour
 
     private void HandleCollisionHappened(CollisionHappenedEvent @event)
     {
-        CancelInvoke(nameof(SpawnObject));
-        GameOverText.SetActive(true);
-        Time.timeScale = 0;
+        if (@event.CollidedWith.GetComponent<Valuable>() != null)
+        {
+            var value = @event.CollidedWith.GetComponent<Valuable>().Value;
+            Destroy(@event.CollidedWith.gameObject);
+            EventManager.PublishEvent(new GiftCollectedEvent { Value = value});
+        }
+        else if(@event.CollidedWith.GetComponent<Destructable>())
+        {
+            EventManager.PublishEvent(new GameOverEvent());
+            CancelInvoke(nameof(SpawnObject));
+            CancelInvoke(nameof(AddPoints));
+            GameOverText.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    void HandleGiftCollected(GiftCollectedEvent @event)
+    {
+        Gifts += @event.Value;
+        GiftsText.text = Gifts.ToString();
     }
 
     void SetPointsText()
     {
-        PointsText.text = $"Score: {Points}";
+        PointsText.text = Points.ToString();
     }
 
     void AddPoints()
