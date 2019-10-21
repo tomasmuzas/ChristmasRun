@@ -126,11 +126,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnPositions:
   - Lane: 0
-    Position: {x: -0.5, y: 0, z: 2.631}
+    Position: {x: -0.5, y: 0, z: 3.631}
   - Lane: 1
-    Position: {x: 0, y: 0, z: 2.631}
+    Position: {x: 0, y: 0, z: 3.631}
   - Lane: 2
-    Position: {x: 0.5, y: 0, z: 2.631}
+    Position: {x: 0.5, y: 0, z: 3.631}
 --- !u!136 &-789826004007838540
 CapsuleCollider:
   m_ObjectHideFlags: 0

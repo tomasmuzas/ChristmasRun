@@ -165,11 +165,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnPositions:
   - Lane: 0
-    Position: {x: -0.5, y: 0.25, z: 2.671}
+    Position: {x: -0.5, y: 0.25, z: 3.671}
   - Lane: 0
-    Position: {x: 0, y: 0.25, z: 2.671}
+    Position: {x: 0, y: 0.25, z: 3.671}
   - Lane: 0
-    Position: {x: 0.5, y: 0.25, z: 2.671}
+    Position: {x: 0.5, y: 0.25, z: 3.671}
 --- !u!114 &1371082505068921879
 MonoBehaviour:
   m_ObjectHideFlags: 0
