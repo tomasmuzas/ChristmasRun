@@ -3,6 +3,7 @@ using Assets.Scripts.Behaviour;
 using Assets.Scripts.EventHandling;
 using Assets.Scripts.Events;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 using Text = TMPro.TextMeshProUGUI;
 
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static float GameSpeed;
     [SerializeField]
     public List<Spawnable> SpawnablePrefabs;
-    public GameObject GameOverText;
+    public GameObject GameOverPanel;
     public GameObject MainCharacter;
     public static GameManager Instance { get; private set; } // static singleton
 
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
             EventManager.PublishEvent(new GameOverEvent());
             CancelInvoke(nameof(SpawnObject));
             CancelInvoke(nameof(AddPoints));
-            GameOverText.SetActive(true);
+            GameOverPanel.SetActive(true);
             Time.timeScale = 0;
         }
     }
@@ -89,5 +90,10 @@ public class GameManager : MonoBehaviour
     void AddPoints()
     {
         Points++;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
