@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Assets.Scripts.Behaviour;
 using Assets.Scripts.EventHandling;
 using Assets.Scripts.Events;
@@ -10,8 +11,10 @@ using Text = TMPro.TextMeshProUGUI;
 public class GameManager : MonoBehaviour
 {
     public float InitialGameSpeed;
-    public float SpawnSpeed;
+    public float InitialSpawnSpeed;
+    public float DifficultyConstant;
     public static float GameSpeed;
+    public static float SpawnSpeed;
     [SerializeField]
     public List<Spawnable> SpawnablePrefabs;
     public GameObject GameOverPanel;
@@ -22,10 +25,12 @@ public class GameManager : MonoBehaviour
     private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
     private readonly EventHandler<GiftCollectedEvent> _giftHandler = new EventHandler<GiftCollectedEvent>();
 
-    private int Points = 0;
+    private int _points;
     public Text PointsText;
-    private int Gifts = 0;
+    private int _gifts;
     public Text GiftsText;
+
+    private bool GameRunning => Time.timeScale > 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,25 +41,33 @@ public class GameManager : MonoBehaviour
         _collisionHandler.EventAction += HandleCollisionHappened;
         _giftHandler.EventAction += HandleGiftCollected;
         GameSpeed = InitialGameSpeed;
-        InvokeRepeating(nameof(SpawnObject), SpawnSpeed, SpawnSpeed);
-        InvokeRepeating(nameof(AddPoints), 0f, GameSpeed * 20);
-        GiftsText.text = Gifts.ToString();
+        SpawnSpeed = InitialSpawnSpeed;
+        StartCoroutine(AddPoints());
+        GiftsText.text = _gifts.ToString();
+        StartCoroutine(SpawnObject());
     }
 
     void Update()
     {
-        SetPointsText();   
+        SetPointsText();
+        IncreaseDifficulty();
     }
-    void SpawnObject()
+
+    IEnumerator SpawnObject()
     {
-        if (SpawnablePrefabs?.Count > 0)
+        while (Time.timeScale > 0)
         {
-            var spawnablePrefab = SpawnablePrefabs[Rnd.Next(0, SpawnablePrefabs.Count)];
-            if (spawnablePrefab.SpawnPositions?.Count > 0)
+            if (SpawnablePrefabs?.Count > 0)
             {
-                var location = spawnablePrefab.SpawnPositions[Rnd.Next(0, spawnablePrefab.SpawnPositions.Count)];
-                Instantiate(spawnablePrefab, location.Position, Quaternion.identity);
+                var spawnablePrefab = SpawnablePrefabs[Rnd.Next(0, SpawnablePrefabs.Count)];
+                if (spawnablePrefab.SpawnPositions?.Count > 0)
+                {
+                    var location = spawnablePrefab.SpawnPositions[Rnd.Next(0, spawnablePrefab.SpawnPositions.Count)];
+                    Instantiate(spawnablePrefab, location.Position, Quaternion.identity);
+                }
             }
+            Debug.Log(SpawnSpeed);
+            yield return new WaitForSeconds(SpawnSpeed);
         }
     }
 
@@ -78,22 +91,35 @@ public class GameManager : MonoBehaviour
 
     void HandleGiftCollected(GiftCollectedEvent @event)
     {
-        Gifts += @event.Value;
-        GiftsText.text = Gifts.ToString();
+        _gifts += @event.Value;
+        GiftsText.text = _gifts.ToString();
     }
 
     void SetPointsText()
     {
-        PointsText.text = Points.ToString();
+        PointsText.text = _points.ToString();
     }
 
-    void AddPoints()
+    IEnumerator AddPoints()
     {
-        Points++;
+        while (GameRunning)
+        {
+            _points++;
+            yield return new WaitForSeconds(0.01f / GameSpeed);
+        }
+        
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void IncreaseDifficulty()
+    {
+        GameSpeed = InitialGameSpeed * (1 + Time.time/DifficultyConstant);
+        SpawnSpeed = Time.time / DifficultyConstant > 1
+            ? InitialSpawnSpeed / (Time.time / DifficultyConstant)
+            : InitialSpawnSpeed;
     }
 }
