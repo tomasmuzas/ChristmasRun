@@ -33,13 +33,13 @@ public class MainCharacter : MonoBehaviour
             _lane++;
             StartCoroutine(StopSlide());
         }
-        if (Input.GetKeyDown("left") && _lane != Lane.Left && !_jumping && !_sliding) 
+        if (Input.GetKeyDown("left") && _lane != Lane.Left && !_jumping && !_sliding)
         {
             _rigidbody.velocity = new Vector3(-MovementDelta / MovementTime, 0, 0);
             _lane--;
             StartCoroutine(StopSlide());
         }
-        if (Input.GetKeyDown("up") && !_jumping)
+        if (Input.GetKeyDown("up") && !_jumping && !_sliding)
         {
             _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, JumpHeight, 0);
             EventManager.PublishEvent(new PlayerJumpedEvent());
@@ -51,6 +51,7 @@ public class MainCharacter : MonoBehaviour
         _sliding = true;
         yield return new WaitForSeconds(MovementTime);
         _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+        _rigidbody.MovePosition(new Vector3(-0.5f + (int)_lane * 0.5f, _rigidbody.position.y, _rigidbody.position.z));
         _sliding = false;
     }
 
