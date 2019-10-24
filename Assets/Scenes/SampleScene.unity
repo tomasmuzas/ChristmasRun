@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0200646ca1db34b95132b6edbc1af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMultiplier: -0.5
+  SpeedMultiplier: -0.25
 --- !u!1 &845993072
 GameObject:
   m_ObjectHideFlags: 0
@@ -7218,7 +7218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0200646ca1db34b95132b6edbc1af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMultiplier: -0.5
+  SpeedMultiplier: -0.25
 --- !u!1001 &1521361339
 PrefabInstance:
   m_ObjectHideFlags: 0
