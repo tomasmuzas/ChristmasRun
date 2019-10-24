@@ -3,6 +3,7 @@
 public class Rotating : MonoBehaviour
 {
     public float RotationSpeed;
+    public Vector3 RotationAxis;
 
     // Start is called before the first frame update
     private void Start()
@@ -12,6 +13,6 @@ public class Rotating : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        transform.Rotate(Vector3.up, RotationSpeed * Time.deltaTime);
+        transform.Rotate(RotationAxis, RotationSpeed * Time.deltaTime);
     }
 }
