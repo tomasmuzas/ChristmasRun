@@ -2511,6 +2511,7 @@ MonoBehaviour:
   - {fileID: 2211321867075976217, guid: 7c7be2aabbca3ee40af6a6c9ad72061b, type: 3}
   - {fileID: 3991112485031090868, guid: 07d6a61aca1630d41b5d4a6a5ef5c48b, type: 3}
   - {fileID: 4438490035628641161, guid: b0850eee53a0f6542be0ad6275ec6091, type: 3}
+  - {fileID: 5511061131556580199, guid: d80fc79e6652d584683d7941ae6db51a, type: 3}
   GameOverPanel: {fileID: 1306285448}
   MainCharacter: {fileID: 276448429}
   PointsText: {fileID: 919903562}
