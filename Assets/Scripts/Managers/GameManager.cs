@@ -10,9 +10,9 @@ using Text = TMPro.TextMeshProUGUI;
 
 public class GameManager : MonoBehaviour
 {
-    public float InitialGameSpeed;
-    public float InitialSpawnSpeed;
-    public float DifficultyConstant;
+    public float InitialGameSpeed = 0.01f;
+    public float InitialSpawnSpeed = 2;
+    public float DifficultyConstant = 20;
     public static float GameSpeed;
     public static float SpawnSpeed;
     [SerializeField]
