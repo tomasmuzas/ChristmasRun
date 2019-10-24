@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 88488816}
   - component: {fileID: 88488812}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8034,7 +8034,7 @@ PrefabInstance:
     - target: {fileID: 9169693766872754250, guid: cde496550473c8440a0b3cd720e321f1,
         type: 3}
       propertyPath: m_Name
-      value: boyFBX
+      value: Boy
       objectReference: {fileID: 0}
     - target: {fileID: 2018584520686030394, guid: cde496550473c8440a0b3cd720e321f1,
         type: 3}
