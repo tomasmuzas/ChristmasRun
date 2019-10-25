@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     private int _totalGifts;
     public Text GiftsTotalText;
     private bool _highScoreReached;
-    public GameObject HousePrefab;
+    public List<GameObject> HousePrefabs;
 
     private bool GameRunning => Time.timeScale > 0;
     // Start is called before the first frame update
@@ -119,9 +119,11 @@ public class GameManager : MonoBehaviour
     {
         while (GameRunning)
         {
-            Instantiate(HousePrefab, new Vector3(-1.204675f, 1.139f, 4.5501f), Quaternion.Euler(0f, 13.479f, 0f));
-            Instantiate(HousePrefab, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
             yield return new WaitForSeconds(0.8f / (GameSpeed * 100));
+            var house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
+            Instantiate(house, new Vector3(-1.204675f, 1.139f, 4.5501f), Quaternion.Euler(0f, 13.479f, 0f));
+            house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
+            Instantiate(house, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
         }
     }
 
