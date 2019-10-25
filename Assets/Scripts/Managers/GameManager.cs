@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     public Text PointsText;
     private int _gifts;
     public Text GiftsText;
+    private int _highScore;
+    public Text HighScoreText;
+
+    private bool _highScoreReached;
 
     private bool GameRunning => Time.timeScale > 0;
     // Start is called before the first frame update
@@ -45,6 +49,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(AddPoints());
         GiftsText.text = _gifts.ToString();
         StartCoroutine(SpawnObject());
+        _highScore = PlayerPrefs.GetInt("highscore", _highScore);
+        _highScoreReached = false;
+        //HighScoreText.text = $"Highscore {_highScore}!";
+
     }
 
     void Update()
@@ -98,6 +106,24 @@ public class GameManager : MonoBehaviour
     void SetPointsText()
     {
         PointsText.text = _points.ToString();
+        if(_points > _highScore)
+        {
+            _highScore = _points;
+            PlayerPrefs.SetInt("highscore", _highScore);
+            PlayerPrefs.Save();
+            if(!_highScoreReached)
+                StartCoroutine("SetHighScoreText");
+        }
+    }
+
+    IEnumerator SetHighScoreText()
+    {
+        HighScoreText.text = "Highscore!";
+        HighScoreText.enabled = true;
+        yield return new WaitForSeconds(2f);
+        HighScoreText.enabled = false;
+        _highScoreReached = true;
+
     }
 
     IEnumerator AddPoints()
