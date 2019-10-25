@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
     private bool _highScoreReached;
     public List<GameObject> HousePrefabs;
 
-    private bool GameRunning => Time.timeScale > 0;
+    public bool GameRunning => Time.timeScale > 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,13 +57,12 @@ public class GameManager : MonoBehaviour
         _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
         _highScoreReached = false;
         //HighScoreText.text = $"Highscore {_highScore}!";
-
+        InvokeRepeating(nameof(IncreaseDifficulty), 0.5f, 0.5f);
     }
 
     void Update()
     {
         SetPointsText();
-        IncreaseDifficulty();
     }
 
     //Used for diplaying framerate
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnObject()
     {
-        while (Time.timeScale > 0)
+        while (GameRunning)
         {
             if (SpawnablePrefabs?.Count > 0)
             {

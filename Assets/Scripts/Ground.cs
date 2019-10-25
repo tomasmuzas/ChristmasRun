@@ -14,7 +14,7 @@ public class Ground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale > 0)
+        if (GameManager.Instance.GameRunning)
         {
             material.mainTextureOffset += new Vector2(0, -GameManager.GameSpeed * SpeedMultiplier);
         }
