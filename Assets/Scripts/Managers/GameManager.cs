@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private int _totalGifts;
     public Text GiftsTotalText;
     private bool _highScoreReached;
+    public GameObject HousePrefab;
 
     private bool GameRunning => Time.timeScale > 0;
     // Start is called before the first frame update
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(AddPoints());
         GiftsText.text = _gifts.ToString();
         StartCoroutine(SpawnObject());
+        StartCoroutine(SpawnHouses());
         _highScore = PlayerPrefs.GetInt("highscore", _highScore);
         _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
         _highScoreReached = false;
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         SetPointsText();
         IncreaseDifficulty();
+        Debug.Log(GameSpeed);
     }
 
     IEnumerator SpawnObject()
@@ -110,6 +113,16 @@ public class GameManager : MonoBehaviour
     {
         _gifts += @event.Value;
         GiftsText.text = _gifts.ToString();
+    }
+
+    private IEnumerator SpawnHouses()
+    {
+        while (GameRunning)
+        {
+            Instantiate(HousePrefab, new Vector3(-1.204675f, 1.139f, 4.5501f), Quaternion.Euler(0f, 13.479f, 0f));
+            Instantiate(HousePrefab, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
+            yield return new WaitForSeconds(0.8f / (GameSpeed * 100));
+        }
     }
 
     void SetPointsText()

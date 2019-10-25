@@ -7,7 +7,7 @@ public class DestroyCollider : MonoBehaviour
         Destroy(other.gameObject);
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
     }
