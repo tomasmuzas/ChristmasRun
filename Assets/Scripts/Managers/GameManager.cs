@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
     public Text GiftsText;
     private int _highScore;
     public Text HighScoreText;
-
+    private int _totalGifts;
+    public Text GiftsTotalText;
     private bool _highScoreReached;
 
     private bool GameRunning => Time.timeScale > 0;
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
         GiftsText.text = _gifts.ToString();
         StartCoroutine(SpawnObject());
         _highScore = PlayerPrefs.GetInt("highscore", _highScore);
+        _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
         _highScoreReached = false;
         //HighScoreText.text = $"Highscore {_highScore}!";
 
@@ -92,11 +94,18 @@ public class GameManager : MonoBehaviour
             EventManager.PublishEvent(new GameOverEvent());
             CancelInvoke(nameof(SpawnObject));
             CancelInvoke(nameof(AddPoints));
+            SetAllGifts();
             GameOverPanel.SetActive(true);
             Time.timeScale = 0;
         }
     }
 
+    void SetAllGifts()
+    {
+        _totalGifts += _gifts;
+        PlayerPrefs.SetInt("totalgifts", _totalGifts);
+        GiftsTotalText.text = $"Total gifts: {_totalGifts}";
+    }
     void HandleGiftCollected(GiftCollectedEvent @event)
     {
         _gifts += @event.Value;
