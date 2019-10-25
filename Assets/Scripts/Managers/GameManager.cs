@@ -63,7 +63,12 @@ public class GameManager : MonoBehaviour
     {
         SetPointsText();
         IncreaseDifficulty();
-        Debug.Log(GameSpeed);
+    }
+
+    //Used for diplaying framerate
+    void OnGUI()
+    {
+        GUI.Label(new Rect(0f, 0f, 100f, 100f), (1.0f / Time.smoothDeltaTime).ToString());
     }
 
     IEnumerator SpawnObject()
@@ -79,7 +84,6 @@ public class GameManager : MonoBehaviour
                     Instantiate(spawnablePrefab, location.Position, Quaternion.identity);
                 }
             }
-            Debug.Log(SpawnSpeed);
             yield return new WaitForSeconds(SpawnSpeed);
         }
     }

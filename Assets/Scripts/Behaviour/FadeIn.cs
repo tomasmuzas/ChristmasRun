@@ -27,11 +27,11 @@ public class FadeIn : MonoBehaviour
         color.a = fadeAmount;
         _renderer.material.color = color;
 
-        for (float f = 0.05f; f <= 1; f += 0.05f)
+        for (float f = 0.05f; f <= 1.01; f += 0.05f)
         {
             color.a = f;
             _renderer.material.color = color;
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.0001f/GameManager.GameSpeed);
         }
     }
 }

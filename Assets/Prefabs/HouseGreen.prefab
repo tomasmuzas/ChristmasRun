@@ -14678,9 +14678,9 @@ GameObject:
   - component: {fileID: 3543492984656586059}
   - component: {fileID: 5734624992649604205}
   - component: {fileID: 5178534320677484466}
-  - component: {fileID: 5178534320677484467}
+  - component: {fileID: 6217635059442727016}
   m_Layer: 0
-  m_Name: House (4)
+  m_Name: HouseGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14927,7 +14927,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6aa8b9d5d3da1544899a606c16ca18c, type: 2}
+  - {fileID: 2100000, guid: 86c9ac4f011491449b9a5195b9eebb71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15001,7 +15001,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5178534320677484467
+--- !u!114 &6217635059442727016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15010,7 +15010,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 506420978776262862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a9b801c0461074cb60632c5740613f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b31f705192155747a89145bfebf13ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &506420978785933855
