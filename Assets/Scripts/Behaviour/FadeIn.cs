@@ -5,6 +5,7 @@ public class FadeIn : MonoBehaviour
 {
     private Renderer _renderer;
     private Material _material;
+    public float FadeStep = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +28,11 @@ public class FadeIn : MonoBehaviour
         color.a = fadeAmount;
         _renderer.material.color = color;
 
-        for (float f = 0.05f; f <= 1.01; f += 0.05f)
+        for (float f = 0f; f <= 1.01; f += FadeStep)
         {
             color.a = f;
             _renderer.material.color = color;
-            yield return new WaitForSeconds(0.0001f/GameManager.GameSpeed);
+            yield return new WaitForSeconds(0.00001f / GameManager.GameSpeed);
         }
     }
 }
