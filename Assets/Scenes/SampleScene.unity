@@ -7875,10 +7875,10 @@ MonoBehaviour:
   HighScoreText: {fileID: 1140207712}
   GiftsTotalText: {fileID: 2013473126}
   HousePrefabs:
-  - {fileID: 4673314423468679762, guid: 9b5e00f2fb4c99345919a6b1b94bebca, type: 3}
-  - {fileID: 740865623841402686, guid: 51e02894fa43bf443bfcdd402d00674b, type: 3}
-  - {fileID: 506420978776262862, guid: 9f3b1f44638552644b8a1c5830b355b6, type: 3}
-  - {fileID: 2971176850005702883, guid: 0718caf0ab1f69e478a9cba19618fadc, type: 3}
+  - {fileID: 8911552866603640523, guid: 7909cfc6972f39642b635b3cdb201b41, type: 3}
+  - {fileID: 8997071651043703841, guid: 99e51dcfb8923774895a3f505f8d4807, type: 3}
+  - {fileID: 8510779361396156996, guid: 0c48286a31724164397fd0dc4652ce14, type: 3}
+  - {fileID: 7002656760040390527, guid: 5f3c5cb658845da469b15e0c4dd0176d, type: 3}
 --- !u!4 &1693387594
 Transform:
   m_ObjectHideFlags: 0
