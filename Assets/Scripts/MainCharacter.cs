@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class MainCharacter : MonoBehaviour
 {
+    public Swipe Swipe;
     private Rigidbody _rigidbody;
     private Lane _lane;
     private bool _jumping;
@@ -27,19 +28,19 @@ public class MainCharacter : MonoBehaviour
     {
         _jumping = Math.Abs(_rigidbody.velocity.y) > 0.01F;
 
-        if (Input.GetKeyDown("right") && _lane != Lane.Right && !_jumping && !_sliding)
+        if ((Input.GetKeyDown("right") || Swipe.SwipeRight) && _lane != Lane.Right && !_jumping && !_sliding)
         {
             _rigidbody.velocity = new Vector3(MovementDelta / MovementTime, 0, 0);
             _lane++;
             StartCoroutine(StopSlide());
         }
-        if (Input.GetKeyDown("left") && _lane != Lane.Left && !_jumping && !_sliding)
+        if ((Input.GetKeyDown("left") || Swipe.SwipeLeft) && _lane != Lane.Left && !_jumping && !_sliding)
         {
             _rigidbody.velocity = new Vector3(-MovementDelta / MovementTime, 0, 0);
             _lane--;
             StartCoroutine(StopSlide());
         }
-        if (Input.GetKeyDown("up") && !_jumping && !_sliding)
+        if ((Input.GetKeyDown("up") || Swipe.SwipeUp) && !_jumping && !_sliding)
         {
             _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, JumpHeight, 0);
             EventManager.PublishEvent(new PlayerJumpedEvent());

@@ -7122,6 +7122,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 136969874325958291}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1280390124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280390117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44eac6c166c64b54ca9f2c9ba98d334c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tap: 0
+  SwipeLeft: 0
+  SwipeRight: 0
+  SwipeUp: 0
+  SwipeDown: 0
+  StartTouch: {x: 0, y: 0}
+  SwipeDelta: {x: 0, y: 0}
 --- !u!1 &1292990066
 GameObject:
   m_ObjectHideFlags: 0
@@ -8520,6 +8539,11 @@ PrefabInstance:
       propertyPath: Plane
       value: 
       objectReference: {fileID: 88488811}
+    - target: {fileID: 2018584520686030394, guid: cde496550473c8440a0b3cd720e321f1,
+        type: 3}
+      propertyPath: Swipe
+      value: 
+      objectReference: {fileID: 1280390124}
     - target: {fileID: 5267542768271923801, guid: cde496550473c8440a0b3cd720e321f1,
         type: 3}
       propertyPath: m_LocalPosition.x
