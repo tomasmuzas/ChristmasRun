@@ -15,6 +15,12 @@ public class CanvasManager : MonoBehaviour
     private int _totalGifts;
     public Text GiftsTotalText;
     private bool _highScoreReached;
+    public Text AddGiftsText;
+    private bool _showAddGiftsText;
+    private int _addGiftsCount;
+    private Vector3 _addGiftsTextScale;
+    public float AddGiftsTextScaleSpeed = 10f;
+    public float AddGiftsTextStayTime = 0.5f;
 
     public GameObject GameOverPanel;
 
@@ -24,6 +30,8 @@ public class CanvasManager : MonoBehaviour
     public void Start()
     {
         GiftsText.text = _gifts.ToString();
+        _addGiftsTextScale = AddGiftsText.transform.localScale;
+        AddGiftsText.transform.localScale = Vector3.zero;
         _giftHandler.EventAction += HandleGiftCollected;
         _gameOverHandler.EventAction += HandleGameOver;
         _highScore = PlayerPrefs.GetInt("highscore", _highScore);
@@ -34,6 +42,29 @@ public class CanvasManager : MonoBehaviour
     void Update()
     {
         SetPointsText();
+        if (_showAddGiftsText)
+        {
+            StartCoroutine(AddGiftsTextEffect());
+            _showAddGiftsText = false;
+        }
+    }
+
+    IEnumerator AddGiftsTextEffect()
+    {
+        var startScale = AddGiftsText.transform.localScale;
+        while (_addGiftsTextScale.x * 0.99f >= AddGiftsText.transform.localScale.x)
+        {
+            AddGiftsText.transform.localScale = Vector3.Lerp(AddGiftsText.transform.localScale, _addGiftsTextScale, AddGiftsTextScaleSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(AddGiftsTextStayTime);
+
+        while (AddGiftsText.transform.localScale.x >= 0.01)
+        {
+            AddGiftsText.transform.localScale = Vector3.Lerp(AddGiftsText.transform.localScale, Vector3.zero, AddGiftsTextScaleSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     void HandleGameOver(GameOverEvent @event)
@@ -46,6 +77,9 @@ public class CanvasManager : MonoBehaviour
     {
         _gifts += @event.Value;
         GiftsText.text = _gifts.ToString();
+        _addGiftsCount = @event.Value;
+        _showAddGiftsText = true;
+        AddGiftsText.text = $"+{_addGiftsCount}";
     }
 
     void SetPointsText()

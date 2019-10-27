@@ -7167,6 +7167,9 @@ MonoBehaviour:
   GiftsText: {fileID: 1122562157}
   HighScoreText: {fileID: 1140207712}
   GiftsTotalText: {fileID: 2013473126}
+  AddGiftsText: {fileID: 183408177}
+  AddGiftsTextScaleSpeed: 10
+  AddGiftsTextStayTime: 0.5
   GameOverPanel: {fileID: 1306285448}
 --- !u!1 &1197827032
 GameObject:
