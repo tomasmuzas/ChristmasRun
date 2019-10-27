@@ -67,10 +67,6 @@ public class MainCharacter : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject == Plane)
-        {
-            return;
-        }
         EventManager.PublishEvent(new CollisionHappenedEvent
         {
             Object = GetComponent<Collider>(),
