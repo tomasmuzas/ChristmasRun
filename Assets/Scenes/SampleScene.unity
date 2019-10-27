@@ -8078,11 +8078,7 @@ MonoBehaviour:
   GiftsText: {fileID: 1122562157}
   HighScoreText: {fileID: 1140207712}
   GiftsTotalText: {fileID: 2013473126}
-  HousePrefabs:
-  - {fileID: 1323422449707653030, guid: 7066c5e31a949484bb48c3e32cf2df92, type: 3}
-  - {fileID: 3326708497127667424, guid: 0846d71ae4dfc5e46b170631c1fa3ce4, type: 3}
-  - {fileID: 6260511471718303258, guid: 5f7613ed7acd1f54aae9326af0996ee3, type: 3}
-  - {fileID: 372826224960013145, guid: 3274d063e759e2d45ae990eaf500db5e, type: 3}
+  HousePrefabs: []
 --- !u!4 &1693387594
 Transform:
   m_ObjectHideFlags: 0

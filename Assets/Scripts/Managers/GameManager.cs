@@ -124,10 +124,13 @@ public class GameManager : MonoBehaviour
         while (GameRunning)
         {
             yield return new WaitForSeconds(0.8f / (GameSpeed * 100));
-            var house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
-            Instantiate(house, new Vector3(-1.204675f, 1.139f, 4.5501f), Quaternion.Euler(0f, 13.479f, 0f));
-            house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
-            Instantiate(house, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
+            if (HousePrefabs?.Count > 0)
+            {
+                var house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
+                Instantiate(house, new Vector3(-1.204675f, 1.139f, 4.5501f), Quaternion.Euler(0f, 13.479f, 0f));
+                house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
+                Instantiate(house, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
+            }
         }
     }
 
