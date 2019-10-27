@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 5511061131556580199}
   - component: {fileID: 5511061131556580196}
   - component: {fileID: -4463493409699229889}
+  - component: {fileID: 1679411476769962720}
   m_Layer: 0
   m_Name: FlyingPresent
   m_TagString: Untagged
@@ -429,6 +430,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Amplitude: 0.2
   Frequency: 1.5
+--- !u!114 &1679411476769962720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565196400492178642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f518d86aff9ab42be35235a465447c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroySpeed: 8
 --- !u!1 &4714783570918298935
 GameObject:
   m_ObjectHideFlags: 0

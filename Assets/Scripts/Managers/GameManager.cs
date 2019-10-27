@@ -93,7 +93,15 @@ public class GameManager : MonoBehaviour
         if (@event.CollidedWith.GetComponent<Valuable>() != null)
         {
             var value = @event.CollidedWith.GetComponent<Valuable>().Value;
-            Destroy(@event.CollidedWith.gameObject);
+            var smoothDestroy = @event.CollidedWith.GetComponent<SmoothDestroy>();
+            if (smoothDestroy)
+            {
+                smoothDestroy.StartDestroy();
+            }
+            else
+            {
+                Destroy(@event.CollidedWith.gameObject);
+            }
             EventManager.PublishEvent(new GiftCollectedEvent { Value = value});
         }
         else if(@event.CollidedWith.GetComponent<Destructable>())
