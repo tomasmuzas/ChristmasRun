@@ -17,52 +17,30 @@ public class GameManager : MonoBehaviour
     public static float SpawnSpeed;
     [SerializeField]
     public List<Spawnable> SpawnablePrefabs;
-    public GameObject GameOverPanel;
     public GameObject MainCharacter;
     public static GameManager Instance { get; private set; } // static singleton
 
     private static readonly Random Rnd = new Random();
     private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
-    private readonly EventHandler<GiftCollectedEvent> _giftHandler = new EventHandler<GiftCollectedEvent>();
-
-    private int _points;
-    public Text PointsText;
-    private int _gifts;
-    public Text GiftsText;
-    private int _highScore;
-    public Text HighScoreText;
-    private int _totalGifts;
-    public Text GiftsTotalText;
-    private bool _highScoreReached;
     public List<GameObject> HousePrefabs;
 
     public bool GameRunning => Time.timeScale > 0;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Instance == null) { Instance = this; }
         else { Destroy(gameObject); }
-        // Cache references to all desired variables
-        MainCharacter = FindObjectOfType<MainCharacter>().gameObject;
-        _collisionHandler.EventAction += HandleCollisionHappened;
-        _giftHandler.EventAction += HandleGiftCollected;
         GameSpeed = InitialGameSpeed;
         SpawnSpeed = InitialSpawnSpeed;
-        StartCoroutine(AddPoints());
-        GiftsText.text = _gifts.ToString();
-        StartCoroutine(SpawnObject());
-        StartCoroutine(SpawnHouses());
-        _highScore = PlayerPrefs.GetInt("highscore", _highScore);
-        _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
-        _highScoreReached = false;
-        //HighScoreText.text = $"Highscore {_highScore}!";
-        InvokeRepeating(nameof(IncreaseDifficulty), 0.5f, 0.5f);
     }
 
-    void Update()
+    // Start is called before the first frame update
+    void Start()
     {
-        SetPointsText();
+        _collisionHandler.EventAction += HandleCollisionHappened;
+        StartCoroutine(SpawnObject());
+        StartCoroutine(SpawnHouses());
+        InvokeRepeating(nameof(IncreaseDifficulty), 0.5f, 0.5f);
     }
 
     //Used for diplaying framerate
@@ -107,24 +85,9 @@ public class GameManager : MonoBehaviour
         else if(@event.CollidedWith.GetComponent<Destructable>())
         {
             EventManager.PublishEvent(new GameOverEvent());
-            CancelInvoke(nameof(SpawnObject));
-            CancelInvoke(nameof(AddPoints));
-            SetAllGifts();
-            GameOverPanel.SetActive(true);
+            CancelInvoke(nameof(IncreaseDifficulty));
             Time.timeScale = 0;
         }
-    }
-
-    void SetAllGifts()
-    {
-        _totalGifts += _gifts;
-        PlayerPrefs.SetInt("totalgifts", _totalGifts);
-        GiftsTotalText.text = $"Total gifts: {_totalGifts}";
-    }
-    void HandleGiftCollected(GiftCollectedEvent @event)
-    {
-        _gifts += @event.Value;
-        GiftsText.text = _gifts.ToString();
     }
 
     private IEnumerator SpawnHouses()
@@ -140,39 +103,6 @@ public class GameManager : MonoBehaviour
                 Instantiate(house, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
             }
         }
-    }
-
-    void SetPointsText()
-    {
-        PointsText.text = _points.ToString();
-        if(_points > _highScore)
-        {
-            _highScore = _points;
-            PlayerPrefs.SetInt("highscore", _highScore);
-            PlayerPrefs.Save();
-            if(!_highScoreReached)
-                StartCoroutine("SetHighScoreText");
-        }
-    }
-
-    IEnumerator SetHighScoreText()
-    {
-        HighScoreText.text = "Highscore!";
-        HighScoreText.enabled = true;
-        yield return new WaitForSeconds(2f);
-        HighScoreText.enabled = false;
-        _highScoreReached = true;
-
-    }
-
-    IEnumerator AddPoints()
-    {
-        while (GameRunning)
-        {
-            _points++;
-            yield return new WaitForSeconds(0.01f / GameSpeed);
-        }
-        
     }
 
     public void RestartGame()
