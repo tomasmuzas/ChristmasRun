@@ -11,6 +11,7 @@ public class MainCharacter : MonoBehaviour
     private Lane _lane;
     private bool _jumping;
     private bool _sliding;
+    private Animator _animation;
     public float JumpHeight;
     public float MovementDelta;
     public float MovementTime;
@@ -20,12 +21,14 @@ public class MainCharacter : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animation = GetComponent<Animator>();
         _lane = Lane.Middle;
     }
 
     // Update is called once per frame
     void Update()
     {
+        _animation.speed = GameManager.GameSpeed * 100;
         _jumping = Math.Abs(_rigidbody.velocity.y) > 0.01F;
 
         if ((Input.GetKeyDown("right") || Swipe.SwipeRight) && _lane != Lane.Right && !_jumping && !_sliding)
