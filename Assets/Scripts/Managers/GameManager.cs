@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
 
     public bool GameRunning => Time.timeScale > 0;
 
+    public Text CountDownText;
+    private float countDown = 3;
+    private bool gameStarted;
+
     void Awake()
     {
         if (Instance == null) { Instance = this; }
@@ -38,11 +42,27 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _collisionHandler.EventAction += HandleCollisionHappened;
-        StartCoroutine(SpawnObject());
-        StartCoroutine(SpawnHouses());
-        InvokeRepeating(nameof(IncreaseDifficulty), 0.5f, 0.5f);
+        //StartCoroutine(SpawnObject());
+        //StartCoroutine(SpawnHouses());
+        //InvokeRepeating(nameof(IncreaseDifficulty), 0.5f, 0.5f);
     }
 
+    void Update()
+    {
+        if(countDown > 0 && !gameStarted)
+        {
+            countDown -= Time.deltaTime;
+            CountDownText.text = $"{Mathf.Round(countDown)}";
+        }
+        else if(countDown <=0 && !gameStarted)
+        {
+            gameStarted = true;
+            CountDownText.text = "";
+            StartCoroutine(SpawnObject());
+            StartCoroutine(SpawnHouses());
+            InvokeRepeating(nameof(IncreaseDifficulty), 0.5f, 0.5f);
+        }
+    }
     //Used for diplaying framerate
     void OnGUI()
     {
