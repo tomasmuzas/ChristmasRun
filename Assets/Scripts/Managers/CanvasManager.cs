@@ -21,7 +21,9 @@ public class CanvasManager : MonoBehaviour
     private Vector3 _addGiftsTextScale;
     public float AddGiftsTextScaleSpeed = 10f;
     public float AddGiftsTextStayTime = 0.5f;
-
+    private float countDown = 3f;
+    public Text CountDownText;
+    private bool gameStarted;
     public GameObject GameOverPanel;
 
     private readonly EventHandler<GiftCollectedEvent> _giftHandler = new EventHandler<GiftCollectedEvent>();
@@ -36,11 +38,24 @@ public class CanvasManager : MonoBehaviour
         _gameOverHandler.EventAction += HandleGameOver;
         _highScore = PlayerPrefs.GetInt("highscore", _highScore);
         _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
-        StartCoroutine(AddPoints());
+        //StartCoroutine(AddPoints());
     }
 
     void Update()
     {
+        if (countDown > 0 && !gameStarted)
+        {
+            countDown -= Time.deltaTime;
+            CountDownText.text = $"{Mathf.Round(countDown)}";
+        }
+        else if (countDown <= 0 && !gameStarted)
+        {
+            var gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gameStarted = true;
+            CountDownText.text = "";
+            StartCoroutine(AddPoints());
+            gameManager.StartGame();
+        }
         SetPointsText();
         if (_showAddGiftsText)
         {
