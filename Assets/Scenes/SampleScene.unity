@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.19736716, g: 0.5018433, b: 0.6089172, a: 1}
+  m_IndirectSpecularColor: {r: 0.1948528, g: 0.5013965, b: 0.6087306, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7015,6 +7015,7 @@ MonoBehaviour:
   AddGiftsText: {fileID: 183408177}
   AddGiftsTextScaleSpeed: 10
   AddGiftsTextStayTime: 0.5
+  CountDownText: {fileID: 1396983167}
   GameOverPanel: {fileID: 1306285448}
 --- !u!1 &1197827032
 GameObject:
@@ -8308,7 +8309,6 @@ MonoBehaviour:
   - {fileID: 5511061131556580199, guid: d80fc79e6652d584683d7941ae6db51a, type: 3}
   MainCharacter: {fileID: 1280390117}
   HousePrefabs: []
-  CountDownText: {fileID: 1396983167}
 --- !u!4 &1693387594
 Transform:
   m_ObjectHideFlags: 0
