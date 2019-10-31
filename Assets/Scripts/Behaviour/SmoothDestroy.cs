@@ -34,4 +34,15 @@ public class SmoothDestroy : MonoBehaviour
     {
         _destroy = true;
     }
+
+    public void StartDestroy(float after)
+    {
+        StartCoroutine(StartDestroyAfter(after));
+    }
+
+    IEnumerator StartDestroyAfter(float after)
+    {
+        yield return new WaitForSeconds(after);
+        _destroy = true;
+    }
 }
