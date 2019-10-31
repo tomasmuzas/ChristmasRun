@@ -8,6 +8,14 @@ public class DestroySelf : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, DestroyAfter);
+        var smoothDestroy = gameObject.GetComponent<SmoothDestroy>();
+        if (smoothDestroy)
+        {
+            smoothDestroy.StartDestroy(DestroyAfter);
+        }
+        else
+        {
+            Destroy(gameObject, DestroyAfter);
+        }
     }
 }
