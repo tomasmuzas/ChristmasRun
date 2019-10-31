@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a06f3be96fe4ec45a522bbed569eb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeStep: 0.1
 --- !u!114 &4990303114408509539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,12 +164,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58bb666eee04904497858f74ebfe8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllowedInstancesPerSpawn: 1
+  SpawnChance: 0.04
   SpawnPositions:
   - Lane: 0
     Position: {x: -0.5, y: 0.25, z: 3.671}
-  - Lane: 0
+  - Lane: 1
     Position: {x: 0, y: 0.25, z: 3.671}
-  - Lane: 0
+  - Lane: 2
     Position: {x: 0.5, y: 0.25, z: 3.671}
 --- !u!114 &1371082505068921879
 MonoBehaviour:

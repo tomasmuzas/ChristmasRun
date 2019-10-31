@@ -811,6 +811,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1551407792}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &529776477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 529776478}
+  - component: {fileID: 529776479}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &529776478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529776477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1909687840}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &529776479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529776477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389fb3c92e945b54b97e99f21dc8179a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnablePrefabs:
+  - {fileID: 3991112485031090868, guid: 07d6a61aca1630d41b5d4a6a5ef5c48b, type: 3}
+  - {fileID: 2211321867075976217, guid: 7c7be2aabbca3ee40af6a6c9ad72061b, type: 3}
+  - {fileID: 4438490035628641161, guid: b0850eee53a0f6542be0ad6275ec6091, type: 3}
+  - {fileID: 5511061131556580199, guid: d80fc79e6652d584683d7941ae6db51a, type: 3}
+  - {fileID: 5227510321512905532, guid: 459436d17c177ca44ac3a704c8b10008, type: 3}
+  HousePrefabs: []
 --- !u!1 &582665745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,7 +1069,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.51
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1061,7 +1111,7 @@ Light:
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0.96
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0.015625, y: 0.015625, z: 1e-44, w: 0}
@@ -1274,7 +1324,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 0.9137255, g: 0.9124213, b: 0.7882353, a: 1}
-  m_Intensity: 0.51
+  m_Intensity: 0.07
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -8300,15 +8350,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialGameSpeed: 0.01
-  InitialSpawnSpeed: 2
   DifficultyConstant: 20
-  SpawnablePrefabs:
-  - {fileID: 2211321867075976217, guid: 7c7be2aabbca3ee40af6a6c9ad72061b, type: 3}
-  - {fileID: 3991112485031090868, guid: 07d6a61aca1630d41b5d4a6a5ef5c48b, type: 3}
-  - {fileID: 4438490035628641161, guid: b0850eee53a0f6542be0ad6275ec6091, type: 3}
-  - {fileID: 5511061131556580199, guid: d80fc79e6652d584683d7941ae6db51a, type: 3}
   MainCharacter: {fileID: 1280390117}
-  HousePrefabs: []
 --- !u!4 &1693387594
 Transform:
   m_ObjectHideFlags: 0
@@ -8447,6 +8490,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810763651}
   m_CullTransparentMesh: 0
+--- !u!1 &1843131435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1843131436}
+  - component: {fileID: 1843131437}
+  m_Layer: 0
+  m_Name: PowerUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1843131436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843131435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1909687840}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1843131437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843131435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e89a73e736e2974289f396b385a38a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerUpMap:
+  - PowerUpPickup: {fileID: 6997908537572160796, guid: 459436d17c177ca44ac3a704c8b10008,
+      type: 3}
+    PowerUpSpawn: {fileID: 4927478371905639825, guid: bf4a6c44eca71fd459776f7c71e5b2ea,
+      type: 3}
 --- !u!1 &1864474310
 GameObject:
   m_ObjectHideFlags: 0
@@ -8514,6 +8605,8 @@ Transform:
   - {fileID: 1693387594}
   - {fileID: 32210452}
   - {fileID: 1155984733}
+  - {fileID: 1843131436}
+  - {fileID: 529776478}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

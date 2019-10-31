@@ -152,12 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58bb666eee04904497858f74ebfe8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllowedInstancesPerSpawn: 1
+  SpawnChance: 0.01
   SpawnPositions:
   - Lane: 0
     Position: {x: -0.5, y: 0.4, z: 3.631}
-  - Lane: 0
+  - Lane: 1
     Position: {x: 0, y: 0.4, z: 3.631}
-  - Lane: 0
+  - Lane: 2
     Position: {x: 0.5, y: 0.4, z: 3.631}
 --- !u!114 &-1893924947984912572
 MonoBehaviour:
