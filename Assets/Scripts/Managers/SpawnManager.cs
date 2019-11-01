@@ -16,7 +16,7 @@ namespace Assets.Scripts.Managers
         public List<GameObject> HousePrefabs;
 
         public static float SpawnSpeed;
-        public static float InitialSpawnSpeed = 1f;
+        public static float InitialSpawnSpeed = 2f;
 
         private static readonly Random Rnd = new Random();
         public static SpawnManager Instance { get; private set; } // static singleton
