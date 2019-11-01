@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllowedInstancesPerSpawn: 2
-  SpawnChance: 0.15
+  SpawnChance: 0.25
   SpawnPositions:
   - Lane: 0
     Position: {x: -0.5, y: 0, z: 3.631}
