@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0200646ca1db34b95132b6edbc1af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMultiplier: -0.25
+  SpeedMultiplier: -0.0035
 --- !u!4 &780878964 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1786288228974656729, guid: 7066c5e31a949484bb48c3e32cf2df92,
@@ -7491,7 +7491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0200646ca1db34b95132b6edbc1af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMultiplier: -0.25
+  SpeedMultiplier: -0.0035
 --- !u!1 &1396983165
 GameObject:
   m_ObjectHideFlags: 0
@@ -8349,8 +8349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0cb1995a045f64c846e9ea6e9e7850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialGameSpeed: 0.01
-  DifficultyConstant: 20
   MainCharacter: {fileID: 1280390117}
 --- !u!4 &1693387594
 Transform:
@@ -11251,6 +11249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6586411433164331282}
   - component: {fileID: 3885939680255964264}
+  - component: {fileID: 7871442869154884354}
   m_Layer: 0
   m_Name: Cartoon+Santa+Claus
   m_TagString: Untagged
@@ -11258,6 +11257,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7871442869154884354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871442869154884353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a9b13c7e6f2d44982657c8bbc805fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7891153946527633813
 Transform:
   m_ObjectHideFlags: 0

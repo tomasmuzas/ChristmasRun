@@ -124,7 +124,7 @@ public class CanvasManager : MonoBehaviour
         while (GameManager.Instance.GameRunning)
         {
             _points++;
-            yield return new WaitForSeconds(0.01f / GameManager.GameSpeed);
+            yield return new WaitForSeconds(0.1f / GameManager.GameSpeed);
         }
     }
 
