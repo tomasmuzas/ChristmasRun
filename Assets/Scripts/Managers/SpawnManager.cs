@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Behaviour;
@@ -32,7 +31,7 @@ namespace Assets.Scripts.Managers
 
             _valuableLane = Lane.Middle;
             valuableSpawnables = SpawnablePrefabs
-                .Where(s => s.GetComponent<Valuable>() != null)
+                .Where(s => s.GetComponent<Valuable>() != null || s.GetComponent<PowerUpPickup>() != null)
                 .OrderBy(s => s.SpawnChance)
                 .ToList();
             obstacleSpawnables = SpawnablePrefabs

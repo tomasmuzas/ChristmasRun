@@ -861,6 +861,7 @@ MonoBehaviour:
   - {fileID: 3991112485031090868, guid: 07d6a61aca1630d41b5d4a6a5ef5c48b, type: 3}
   - {fileID: 5227510321512905532, guid: 459436d17c177ca44ac3a704c8b10008, type: 3}
   - {fileID: 6841391636187120053, guid: c554434bd78acf14ab5a50a582aac7a4, type: 3}
+  - {fileID: 5227510321512905532, guid: 459436d17c177ca44ac3a704c8b10008, type: 3}
   HousePrefabs: []
 --- !u!1 &582665745
 GameObject:
