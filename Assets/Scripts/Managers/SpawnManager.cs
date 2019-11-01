@@ -16,17 +16,29 @@ namespace Assets.Scripts.Managers
         public List<GameObject> HousePrefabs;
 
         public static float SpawnSpeed => InitialSpawnSpeed / GameManager.GameSpeed;
-        public static float InitialSpawnSpeed = 2f;
+        public static float InitialSpawnSpeed = 0.7f;
 
         private static readonly Random Rnd = new Random();
         public static SpawnManager Instance { get; private set; } // static singleton
+
+        private List<Spawnable> valuableSpawnables;
+        private List<Spawnable> obstacleSpawnables;
+        private Lane _valuableLane;
 
         void Awake()
         {
             if (Instance == null) { Instance = this; }
             else { Destroy(gameObject); }
 
-            SpawnablePrefabs = SpawnablePrefabs.OrderBy(p => p.SpawnChance).ToList();
+            _valuableLane = Lane.Middle;
+            valuableSpawnables = SpawnablePrefabs
+                .Where(s => s.GetComponent<Valuable>() != null)
+                .OrderBy(s => s.SpawnChance)
+                .ToList();
+            obstacleSpawnables = SpawnablePrefabs
+                .Where(s => s.GetComponent<Destructable>() != null)
+                .OrderBy(s => s.SpawnChance)
+                .ToList();
         }
 
         void Start()
@@ -34,7 +46,7 @@ namespace Assets.Scripts.Managers
             StartCoroutine(SpawnHouses());
         }
 
-        private IEnumerator SpawnObject()
+        private IEnumerator SpawnLane(Lane lane)
         {
             if (SpawnablePrefabs?.Count == 0)
             {
@@ -43,49 +55,29 @@ namespace Assets.Scripts.Managers
 
             while (GameManager.Instance.GameRunning)
             {
-                var spawnCounts = new Dictionary<Type, int>();
-                foreach (var spawnablePrefab in SpawnablePrefabs)
+                var spawnable = PickSpawnableBasedOnChance(lane == _valuableLane ? valuableSpawnables : obstacleSpawnables);
+
+                if (spawnable != null)
                 {
-                    spawnCounts[spawnablePrefab.GetType()] = 0;
+                    var spawnPosition = spawnable.SpawnPositions.Single(p => p.Lane == lane);
+                    Instantiate(spawnable, spawnPosition.Position, Quaternion.identity);
                 }
 
-                var numberOfItems = Rnd.Next(1, 3 + 1); // Random number between 1 and 3
-                Debug.Log(numberOfItems);
-                var currentLane = (Lane) Rnd.Next(0, numberOfItems == 3 ? 0 + 1 : 1 + 1); // Start spawning from either 1st or 2nd lane
-
-                while (numberOfItems-- > 0)
-                {
-                    var spawnableItem = GetSpawnableItem(spawnCounts);
-                    if (spawnableItem?.SpawnPositions?.Count > 0)
-                    {
-                        var location = spawnableItem.SpawnPositions.SingleOrDefault(s => s.Lane == currentLane);
-                        if (location != null)
-                        {
-                            Instantiate(spawnableItem, location.Position, Quaternion.identity);
-                            currentLane++;
-                        }
-                    }
-                }
-
-                yield return new WaitForSeconds(SpawnSpeed);
+                yield return new WaitForSeconds(lane == _valuableLane ? SpawnSpeed : 1/SpawnSpeed);
             }
         }
 
-        private Spawnable GetSpawnableItem(Dictionary<Type, int> spawnCounts)
+        private Spawnable PickSpawnableBasedOnChance(List<Spawnable> possibleSpawnables)
         {
-            double diceRoll = Rnd.NextDouble();
+            var randomNumber = Rnd.NextDouble();
 
-            double cumulative = 0.0;
-            for (int i = 0; i < SpawnablePrefabs.Count; i++)
+            var cumulative = 0.0;
+            for (var i = 0; i < possibleSpawnables.Count; i++)
             {
-                cumulative += SpawnablePrefabs[i].SpawnChance;
-                if (diceRoll < cumulative)
+                cumulative += possibleSpawnables[i].SpawnChance;
+                if (randomNumber < cumulative)
                 {
-                    var spawnedItem = SpawnablePrefabs[i];
-                    if (spawnCounts[spawnedItem.GetType()] < spawnedItem.AllowedInstancesPerSpawn)
-                    {
-                        return spawnedItem;
-                    }
+                    return possibleSpawnables[i];
                 }
             }
 
@@ -109,7 +101,20 @@ namespace Assets.Scripts.Managers
 
         public void StartSpawning()
         {
-            StartCoroutine(SpawnObject());
+            StartCoroutine(SpawnLane(Lane.Left));
+            StartCoroutine(SpawnLane(Lane.Middle));
+            StartCoroutine(SpawnLane(Lane.Right));
+            StartCoroutine(ChangeValuableLane());
+        }
+
+        private IEnumerator ChangeValuableLane()
+        {
+            while (GameManager.Instance.GameRunning)
+            {
+                _valuableLane = (Lane)Rnd.Next(0, 2 + 1);
+                Debug.Log(_valuableLane);
+                yield return new WaitForSeconds(3 / GameManager.GameSpeed);
+            }
         }
     }
 }
