@@ -14,7 +14,7 @@ namespace Assets.Scripts.Behaviour
         // Update is called once per frame
         void Update()
         {
-            _body.velocity = new Vector3(_body.velocity.x, _body.velocity.y, -GameManager.GameSpeed * 100);
+            _body.velocity = new Vector3(_body.velocity.x, _body.velocity.y, -GameManager.GameSpeed);
         }
     }
 }

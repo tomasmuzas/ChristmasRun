@@ -2,8 +2,8 @@
 
 public class Ground : MonoBehaviour
 {
-    private Material material;
     public float SpeedMultiplier = 1;
+    private Material material;
 
     // Start is called before the first frame update
     void Start()

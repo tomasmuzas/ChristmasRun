@@ -28,7 +28,7 @@ public class MainCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _animation.speed = GameManager.GameSpeed * 100;
+        _animation.speed = GameManager.GameSpeed;
         _jumping = Math.Abs(_rigidbody.velocity.y) > 0.01F;
 
         if ((Input.GetKeyDown("right") || Swipe.SwipeRight) && _lane != Lane.Right && !_jumping && !_sliding)

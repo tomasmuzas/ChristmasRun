@@ -15,7 +15,7 @@ namespace Assets.Scripts.Managers
         [SerializeField]
         public List<GameObject> HousePrefabs;
 
-        public static float SpawnSpeed;
+        public static float SpawnSpeed => InitialSpawnSpeed / GameManager.GameSpeed;
         public static float InitialSpawnSpeed = 2f;
 
         private static readonly Random Rnd = new Random();
@@ -31,7 +31,6 @@ namespace Assets.Scripts.Managers
 
         void Start()
         {
-            SpawnSpeed = InitialSpawnSpeed;
             StartCoroutine(SpawnHouses());
         }
 

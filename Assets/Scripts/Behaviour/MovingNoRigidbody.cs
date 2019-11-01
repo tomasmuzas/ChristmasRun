@@ -14,7 +14,7 @@ public class MovingNoRigidbody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _velocity = -GameManager.GameSpeed * 100;
+        _velocity = -GameManager.GameSpeed;
         if (Time.deltaTime > 0)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + _velocity * Time.deltaTime);
