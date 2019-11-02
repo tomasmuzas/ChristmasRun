@@ -17,7 +17,7 @@ namespace Assets.Scripts.Managers
 
         private int _totalGifts;
         private Skin equippedSkin;
-        private int _currentSkin = 1;
+        private int _currentSkin = 0;
 
         void Awake()
         {
@@ -46,21 +46,57 @@ namespace Assets.Scripts.Managers
         {
             SkinPanel.transform.Find("SkinPreview").GetComponent<Image>().sprite = skin.Sprite;
             SkinPanel.transform.Find("Panel").Find("SkinNameAndPrice").GetComponent<Text>().text = $"{skin.Name}: {skin.Price}";
-            var actionButtonText = MainPanel.transform.Find("ActionButton").GetComponentInChildren<Text>();
+            var actionButtonParent = MainPanel.transform.Find("ActionButton");
+            var actionButton = actionButtonParent.GetComponent<Button>();
+            var actionButtonText = actionButton.GetComponentInChildren<Text>();
+
+            actionButton.interactable = true;
+            var buttonClickedEvent = new Button.ButtonClickedEvent();
+            
             if (skin.Name == equippedSkin.Name)
             {
                 actionButtonText.text = "Equipped!";
+                buttonClickedEvent.RemoveAllListeners();
             }
             else if (skin.Price > 0 && !IsSkinUnlocked(skin.Name))
             {
                 actionButtonText.fontStyle = FontStyles.Normal;
+                if (skin.Price > _totalGifts)
+                {
+                    actionButton.interactable = false;
+                    buttonClickedEvent.RemoveAllListeners();
+                }
+                else
+                {
+                    buttonClickedEvent.AddListener(() => UnlockSkin(skin));
+                }
+
                 actionButtonText.text = "Unlock";
             }
             else
             {
                 actionButtonText.fontStyle = FontStyles.Normal;
                 actionButtonText.text = "Equip";
+                buttonClickedEvent.AddListener(() => EquipSkin(skin));
             }
+
+            actionButton.onClick = buttonClickedEvent;
+        }
+
+        private void UnlockSkin(Skin skin)
+        {
+            _totalGifts -= skin.Price;
+            PlayerPrefs.SetInt("totalgifts", _totalGifts);
+            PlayerPrefs.SetInt($"{skin.Name.ToLower()}_skin_unlocked", 1);
+            GiftsTotal.text = _totalGifts.ToString();
+            DisplaySkin(skin);
+        }
+
+        private void EquipSkin(Skin skin)
+        {
+            equippedSkin = skin;
+            PlayerPrefs.SetString("equipped_skin_name", skin.Name);
+            DisplaySkin(skin);
         }
 
         private bool IsSkinUnlocked(string skinName)

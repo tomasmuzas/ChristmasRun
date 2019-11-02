@@ -449,8 +449,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.128649, g: 0.5566038, b: 0.18892431, a: 1}
     m_HighlightedColor: {r: 0.2559185, g: 0.764151, b: 0.3877817, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.25490198, g: 0.76470596, b: 0.38823533, a: 1}
+    m_SelectedColor: {r: 0.12941177, g: 0.5568628, b: 0.18823531, a: 1}
     m_DisabledColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -817,8 +817,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.128649, g: 0.5566038, b: 0.18892431, a: 1}
     m_HighlightedColor: {r: 0.2559185, g: 0.764151, b: 0.3877817, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.25490198, g: 0.76470596, b: 0.38823533, a: 1}
+    m_SelectedColor: {r: 0.12941177, g: 0.5568628, b: 0.18823531, a: 1}
     m_DisabledColor: {r: 0.5686275, g: 0.5686275, b: 0.5686275, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1456,7 +1456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Elf
-  Price: 100
+  Price: 2000
   Sprite: {fileID: 21300000, guid: eadc1a13523311a4f88d7f556dd607a6, type: 3}
 --- !u!4 &1331868928
 Transform:
