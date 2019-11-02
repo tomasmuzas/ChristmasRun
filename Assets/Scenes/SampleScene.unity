@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.19736716, g: 0.5018433, b: 0.6089172, a: 1}
+  m_IndirectSpecularColor: {r: 0.19733685, g: 0.5017648, b: 0.6089525, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8563,8 +8563,8 @@ MonoBehaviour:
   HighScoreText: {fileID: 1140207712}
   GiftsTotalText: {fileID: 2013473126}
   AddGiftsText: {fileID: 183408177}
-  AddGiftsTextScaleSpeed: 10
-  AddGiftsTextStayTime: 0.5
+  AddGiftsTextScaleSpeed: 25
+  AddGiftsTextStayTime: 0.2
   CountDownText: {fileID: 1396983167}
   GameOverPanel: {fileID: 1306285448}
 --- !u!1 &1161032693
