@@ -15,7 +15,7 @@ namespace Assets.Scripts.Managers
         private readonly EventHandler<GameOverEvent> _gameOverHandler = new EventHandler<GameOverEvent>();
         private readonly EventHandler<PlayerJumpedEvent> _jumpHandler = new EventHandler<PlayerJumpedEvent>();
 
-        public void Awake()
+        public void Start()
         {
             backgroundMusicAudioSource = gameObject.AddComponent<AudioSource>();
             actionAudioSource = gameObject.AddComponent<AudioSource>();

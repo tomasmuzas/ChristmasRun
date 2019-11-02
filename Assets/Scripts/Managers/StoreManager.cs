@@ -2,6 +2,7 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Text = TMPro.TextMeshProUGUI;
 
@@ -28,6 +29,11 @@ namespace Assets.Scripts.Managers
             GiftsTotal.text = _totalGifts.ToString();
 
             DisplaySkin(Skins[_currentSkin]);
+        }
+
+        public void LoadMainLevel() 
+        {
+            SceneManager.LoadScene(0);
         }
 
         public void PreviousSkin()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Assets.Scripts.Behaviour;
 using Assets.Scripts.Events;
 using Assets.Scripts.Managers;
