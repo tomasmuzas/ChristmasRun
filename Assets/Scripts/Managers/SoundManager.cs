@@ -40,6 +40,7 @@ namespace Assets.Scripts.Managers
 
         private void PlayGameOverSounds()
         {
+            backgroundMusicAudioSource.loop = false;
             backgroundMusicAudioSource.Stop();
             backgroundMusicAudioSource.clip = GameOverSound;
             backgroundMusicAudioSource.Play();
