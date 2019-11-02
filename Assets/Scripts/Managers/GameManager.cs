@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour
         SpawnManager.Instance.StartSpawning();
     }
 
+    public void OpenSkinStore()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     //Used for diplaying framerate
     void OnGUI()
     {
