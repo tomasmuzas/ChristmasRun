@@ -30,16 +30,22 @@ public class PowerUpManager : MonoBehaviour
         if (@event.Object.GetComponent<MainCharacter>() && PowerUpMap.Any(x => collidedObjectName.StartsWith(x.PowerUpPickup.name)))
         {
             var powerUp = PowerUpMap.Single(x => collidedObjectName.StartsWith(x.PowerUpPickup.name));
-            Instantiate(powerUp.PowerUpSpawn);
-            var smoothDestroy = @event.CollidedWith.GetComponent<SmoothDestroy>();
-            if (smoothDestroy)
-            {
-                smoothDestroy.StartDestroy();
-            }
-            else
-            {
-                Destroy(@event.CollidedWith.gameObject);
-            }
+            var powerUpSpawn = powerUp.PowerUpSpawn.GetComponent<IPowerUpSpawn>();
+            powerUpSpawn.Activate();
+            DestroyPowerUpSpawn(@event);
+        }
+    }
+
+    void DestroyPowerUpSpawn(CollisionHappenedEvent @event)
+    {
+        var smoothDestroy = @event.CollidedWith.GetComponent<SmoothDestroy>();
+        if (smoothDestroy)
+        {
+            smoothDestroy.StartDestroy();
+        }
+        else
+        {
+            Destroy(@event.CollidedWith.gameObject);
         }
     }
 }

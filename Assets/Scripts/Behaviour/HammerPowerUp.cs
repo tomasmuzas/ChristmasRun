@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HammerPowerUp : MonoBehaviour
+public class HammerPowerUp : MonoBehaviour, IPowerUpSpawn
 {
     // Start is called before the first frame update
     void Start()
@@ -27,5 +27,10 @@ public class HammerPowerUp : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
+    }
+
+    public void Activate()
+    {
+        Instantiate(gameObject);
     }
 }
