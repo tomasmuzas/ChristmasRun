@@ -58,7 +58,7 @@ namespace Assets.Scripts.Managers
                 if (spawnable != null)
                 {
                     var spawnPosition = spawnable.SpawnPositions.Single(p => p.Lane == lane);
-                    Instantiate(spawnable, spawnPosition.Position, Quaternion.identity);
+                    Instantiate(spawnable, spawnPosition.Position, spawnable.transform.rotation);
                 }
 
                 yield return new WaitForSeconds(lane == _valuableLane ? SpawnSpeed : 1/SpawnSpeed);
