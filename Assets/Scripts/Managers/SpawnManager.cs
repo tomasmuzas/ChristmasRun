@@ -27,7 +27,6 @@ namespace Assets.Scripts.Managers
         void Awake()
         {
             if (Instance == null) { Instance = this; }
-            else { Destroy(gameObject); }
 
             _valuableLane = Lane.Middle;
             valuableSpawnables = SpawnablePrefabs

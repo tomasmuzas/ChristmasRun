@@ -33,6 +33,7 @@ namespace Assets.Scripts.Managers
 
         public void LoadMainLevel() 
         {
+            EventManager.DisposeAllHandlers();
             SceneManager.LoadScene(0);
         }
 

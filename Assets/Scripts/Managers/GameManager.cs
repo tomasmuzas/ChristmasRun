@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1;
         _startTime = Time.time;
         if (Instance == null) { Instance = this; }
-        else { Destroy(gameObject); }
     }
 
     // Start is called before the first frame update
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1;
+        EventManager.DisposeAllHandlers();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

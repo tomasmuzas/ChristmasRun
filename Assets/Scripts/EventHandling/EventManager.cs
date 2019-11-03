@@ -22,6 +22,11 @@ public class EventManager : MonoBehaviour
         Handlers[type].Add(handler);
     }
 
+    public static void DisposeAllHandlers()
+    {
+        Handlers.Clear();
+    }
+
     public static void PublishEvent(IEvent @event)
     {
         var eventType = @event.GetType();
