@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts;
 using Assets.Scripts.Behaviour;
 using Assets.Scripts.Events;
 using Assets.Scripts.Managers;
@@ -11,6 +14,9 @@ public class GameManager : MonoBehaviour
     public static float GameSpeed => (float)(1 + Math.Sqrt((Time.time - _startTime) / 100000));
 
     public GameObject MainCharacter;
+
+    [SerializeField]
+    public List<Skin> Skins;
     
     public static GameManager Instance { get; private set; } // static singleton
 
@@ -23,6 +29,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         _startTime = Time.time;
         if (Instance == null) { Instance = this; }
+
+        var currentSkinName = PlayerPrefs.GetString("equipped_skin_name", "Boy");
+        var currentSkin = Skins.Single(s => s.Name == currentSkinName);
+        MainCharacter = Instantiate(
+            currentSkin.Prefab, 
+            new Vector3(-0.015f, 1.19f, 0.388f),
+            currentSkin.Prefab.transform.rotation);
     }
 
     // Start is called before the first frame update

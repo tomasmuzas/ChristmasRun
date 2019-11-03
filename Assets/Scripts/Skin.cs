@@ -11,5 +11,7 @@ namespace Assets.Scripts
         public int Price;
 
         public Sprite Sprite;
+
+        public GameObject Prefab;
     }
 }
