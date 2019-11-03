@@ -34,6 +34,7 @@ namespace Assets.Scripts.Managers
         private void StartBackgroundMusic()
         {
             backgroundMusicAudioSource.clip = BackgroundMusic;
+            backgroundMusicAudioSource.loop = true;
             backgroundMusicAudioSource.Play();
         }
 

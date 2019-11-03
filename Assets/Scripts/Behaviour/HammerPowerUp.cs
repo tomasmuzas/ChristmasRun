@@ -19,13 +19,27 @@ public class HammerPowerUp : PowerUpSpawn
 
     void OnCollisionEnter(Collision other)
     {
-        Destroy(other.gameObject);
+        DestroyGameObject(other.gameObject);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        DestroyGameObject(other.gameObject);
     }
+
+    private void DestroyGameObject(GameObject gameObject)
+    {
+        var smoothDestroy = gameObject.GetComponent<SmoothDestroy>();
+        if (smoothDestroy)
+        {
+            smoothDestroy.StartDestroy();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
     public override void Activate()
     {
