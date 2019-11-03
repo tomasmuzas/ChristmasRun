@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HammerPowerUp : MonoBehaviour
+public class HammerPowerUp : PowerUpSpawn
 {
     // Start is called before the first frame update
     void Start()
@@ -21,11 +19,30 @@ public class HammerPowerUp : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Destroy(other.gameObject);
+        DestroyGameObject(other.gameObject);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        DestroyGameObject(other.gameObject);
+    }
+
+    private void DestroyGameObject(GameObject gameObject)
+    {
+        var smoothDestroy = gameObject.GetComponent<SmoothDestroy>();
+        if (smoothDestroy)
+        {
+            smoothDestroy.StartDestroy();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+    public override void Activate()
+    {
+        Instantiate(gameObject);
     }
 }

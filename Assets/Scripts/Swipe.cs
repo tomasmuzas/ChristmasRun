@@ -58,7 +58,7 @@ public class Swipe : MonoBehaviour
             }
         }
 
-        if (SwipeDelta.magnitude > 100)
+        if (SwipeDelta.magnitude > 50)
         {
             float x = SwipeDelta.x;
             float y = SwipeDelta.y;
