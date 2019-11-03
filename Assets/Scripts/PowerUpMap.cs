@@ -4,6 +4,6 @@ using UnityEngine;
 [Serializable]
 public struct PowerUpMap
 {
-    [SerializeField] public GameObject PowerUpPickup;
-    [SerializeField] public GameObject PowerUpSpawn;
+    [SerializeField] public PowerUpPickup PowerUpPickup;
+    [SerializeField] public PowerUpSpawn PowerUpSpawn;
 }

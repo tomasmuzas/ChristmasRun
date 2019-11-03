@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.EventHandling;
 using Assets.Scripts.Events;
-using UnityEditor;
 using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
@@ -30,8 +29,7 @@ public class PowerUpManager : MonoBehaviour
         if (@event.Object.GetComponent<MainCharacter>() && PowerUpMap.Any(x => collidedObjectName.StartsWith(x.PowerUpPickup.name)))
         {
             var powerUp = PowerUpMap.Single(x => collidedObjectName.StartsWith(x.PowerUpPickup.name));
-            var powerUpSpawn = powerUp.PowerUpSpawn.GetComponent<IPowerUpSpawn>();
-            powerUpSpawn.Activate();
+            powerUp.PowerUpSpawn.Activate();
             DestroyPowerUpSpawn(@event);
         }
     }

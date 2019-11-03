@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HammerPowerUp : MonoBehaviour, IPowerUpSpawn
+public class HammerPowerUp : PowerUpSpawn
 {
     // Start is called before the first frame update
     void Start()
@@ -29,7 +27,7 @@ public class HammerPowerUp : MonoBehaviour, IPowerUpSpawn
         Destroy(other.gameObject);
     }
 
-    public void Activate()
+    public override void Activate()
     {
         Instantiate(gameObject);
     }
