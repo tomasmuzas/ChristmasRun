@@ -21,7 +21,7 @@ public class CanvasManager : MonoBehaviour
     private Vector3 _addGiftsTextScale;
     public float AddGiftsTextScaleSpeed = 10f;
     public float AddGiftsTextStayTime = 0.5f;
-    private float countDown = 3f;
+    public float countDown = 5f;
     public Text CountDownText;
     private bool gameStarted;
     public GameObject GameOverPanel;
