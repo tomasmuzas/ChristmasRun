@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         var currentSkin = Skins.Single(s => s.Name == currentSkinName);
         MainCharacter = Instantiate(
             currentSkin.Prefab, 
-            new Vector3(-0.015f, 1.19f, 0.388f),
+            new Vector3(0f, 1.19f, 0f),
             currentSkin.Prefab.transform.rotation);
     }
 

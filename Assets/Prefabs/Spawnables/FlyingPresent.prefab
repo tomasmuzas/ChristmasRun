@@ -314,16 +314,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4565196400492178642}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.1, z: 2.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3145506114505928268}
   - {fileID: 2363824043831925665}
-  - {fileID: 5511061130526993043}
+  - {fileID: 5511061130526993252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7461215438907126715
 Animator:
   serializedVersion: 3
@@ -397,7 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58bb666eee04904497858f74ebfe8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllowedInstancesPerSpawn: 3
   SpawnChance: 0.1
   SpawnPositions:
   - Lane: 0
@@ -832,7 +831,7 @@ PrefabInstance:
     - {fileID: 2118621533530569560, guid: b0850eee53a0f6542be0ad6275ec6091, type: 3}
     - {fileID: 7150055934965393296, guid: b0850eee53a0f6542be0ad6275ec6091, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b0850eee53a0f6542be0ad6275ec6091, type: 3}
---- !u!4 &5511061130526993043 stripped
+--- !u!4 &5511061130526993252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6950751856151619237, guid: b0850eee53a0f6542be0ad6275ec6091,
     type: 3}
