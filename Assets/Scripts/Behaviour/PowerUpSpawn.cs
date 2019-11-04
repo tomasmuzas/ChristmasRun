@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class PowerUpSpawn : MonoBehaviour
 {
-    public abstract void Activate();
+    public abstract GameObject Activate();
 }

@@ -10,17 +10,13 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField]
     public List<PowerUpMap> PowerUpMap;
     private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
+    private List<GameObject> _activePowerUpInstances = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         _collisionHandler.EventAction += HandleCollisionHappened;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        InvokeRepeating(nameof(CleanUpInstances), 1, 1);
     }
 
     void HandleCollisionHappened(CollisionHappenedEvent @event)
@@ -29,7 +25,20 @@ public class PowerUpManager : MonoBehaviour
         if (@event.Object.GetComponent<MainCharacter>() && PowerUpMap.Any(x => collidedObjectName.StartsWith(x.PowerUpPickup.name)))
         {
             var powerUp = PowerUpMap.Single(x => collidedObjectName.StartsWith(x.PowerUpPickup.name));
-            powerUp.PowerUpSpawn.Activate();
+
+            var alreadyActivePowerup = _activePowerUpInstances.FirstOrDefault(x => x != null && x.name.StartsWith(powerUp.PowerUpSpawn.name));
+            Debug.Log(_activePowerUpInstances.Count);
+            var alreadyActivePowerupDestroySelf = alreadyActivePowerup?.GetComponent<DestroySelf>();
+            if (alreadyActivePowerup && alreadyActivePowerupDestroySelf)
+            {
+                alreadyActivePowerup.GetComponent<DestroySelf>().ResetDestructionTime();
+            }
+            else
+            {
+                var powerUpInstance = powerUp.PowerUpSpawn.Activate();
+                _activePowerUpInstances.Add(powerUpInstance);
+            }
+
             DestroyPowerUpSpawn(@event);
         }
     }
@@ -45,5 +54,10 @@ public class PowerUpManager : MonoBehaviour
         {
             Destroy(@event.CollidedWith.gameObject);
         }
+    }
+
+    private void CleanUpInstances()
+    {
+        _activePowerUpInstances = _activePowerUpInstances.Where(x => x != null).ToList();
     }
 }

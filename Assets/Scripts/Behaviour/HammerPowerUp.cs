@@ -41,8 +41,8 @@ public class HammerPowerUp : PowerUpSpawn
     }
 
 
-    public override void Activate()
+    public override GameObject Activate()
     {
-        Instantiate(gameObject);
+        return Instantiate(gameObject);
     }
 }

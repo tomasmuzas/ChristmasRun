@@ -90,9 +90,9 @@ public class MagnetPowerUp : PowerUpSpawn
         }
     }
 
-    public override void Activate()
+    public override GameObject Activate()
     {
-        Instantiate(gameObject);
+        return Instantiate(gameObject);
     }
 
     private float Vector2DDistance(Vector3 v1, Vector3 v2)
