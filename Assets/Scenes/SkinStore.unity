@@ -1226,7 +1226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Girl
   Price: 0
-  Sprite: {fileID: 21300000, guid: 4e294b1108abed34daa6de6fced36a47, type: 3}
+  Sprite: {fileID: 21300000, guid: a306e750ca78583459b296d333ad0f53, type: 3}
+  Prefab: {fileID: 0}
 --- !u!4 &994765713
 Transform:
   m_ObjectHideFlags: 0
@@ -1586,6 +1587,7 @@ MonoBehaviour:
   Name: Elf
   Price: 2000
   Sprite: {fileID: 21300000, guid: eadc1a13523311a4f88d7f556dd607a6, type: 3}
+  Prefab: {fileID: 0}
 --- !u!4 &1331868928
 Transform:
   m_ObjectHideFlags: 0
@@ -1783,6 +1785,7 @@ MonoBehaviour:
   Name: Boy
   Price: 0
   Sprite: {fileID: 21300000, guid: d9bb59c8188406642a02db8fbb5ac0c4, type: 3}
+  Prefab: {fileID: 0}
 --- !u!4 &1681190890
 Transform:
   m_ObjectHideFlags: 0
