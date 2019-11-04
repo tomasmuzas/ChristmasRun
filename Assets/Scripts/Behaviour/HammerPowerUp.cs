@@ -43,6 +43,10 @@ public class HammerPowerUp : PowerUpSpawn
 
     public override GameObject Activate()
     {
-        return Instantiate(gameObject);
+        var prefabPosition = gameObject.transform.position;
+        return Instantiate(
+            gameObject,
+            new Vector3(GameManager.Instance.MainCharacter.transform.position.x, prefabPosition.y, prefabPosition.z),
+            gameObject.transform.rotation);
     }
 }
