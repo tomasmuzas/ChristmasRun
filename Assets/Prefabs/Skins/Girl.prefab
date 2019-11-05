@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 2593916588186741704}
   - component: {fileID: 958570405053086432}
   m_Layer: 0
-  m_Name: girl_fixed_animation
+  m_Name: Girl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -711,7 +711,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6285117324031275217}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a8e6a8a48ac1ae44d90776a94b6d1004, type: 3}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a1b4372ca66d4da4d8088cdf00956752, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87eb72dac3869040bbaafebde0de754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Swipe: {fileID: 1880631487380656763, guid: 0003040d9a5257641b84a52ad2b7f8b2, type: 3}
+  Swipe: {fileID: 958570405053086432}
   JumpHeight: 4
   MovementDelta: 0.5
   MovementTime: 0.2
