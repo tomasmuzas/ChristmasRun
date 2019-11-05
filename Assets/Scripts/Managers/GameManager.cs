@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private readonly Assets.Scripts.EventHandling.EventHandler<CollisionHappenedEvent> _collisionHandler = new Assets.Scripts.EventHandling.EventHandler<CollisionHappenedEvent>();
 
     public bool GameRunning => Time.timeScale > 0;
+    public bool GameStarted;
+    public bool GameRunningAndStarted => GameRunning && GameStarted;
 
     void Awake()
     {
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        GameStarted = true;
         SpawnManager.Instance.StartSpawning();
     }
 
@@ -80,6 +83,7 @@ public class GameManager : MonoBehaviour
         {
             EventManager.PublishEvent(new GameOverEvent());
             Time.timeScale = 0;
+            GameStarted = false;
         }
     }
 

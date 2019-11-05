@@ -15,7 +15,7 @@ public class MovingNoRigidbody : MonoBehaviour
     void Update()
     {
         _velocity = -GameManager.GameSpeed;
-        if (Time.deltaTime > 0)
+        if (GameManager.Instance.GameRunningAndStarted)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + _velocity * Time.deltaTime);
         }
