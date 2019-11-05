@@ -9,7 +9,6 @@ public class ParticleManager : MonoBehaviour
 {
     public GameObject GroundDustParticles;
     public GameObject PickupEffectParticle;
-    private bool _fisrtGroundCollisionHappened = false;
     private readonly EventHandler<CollisionHappenedEvent> _collisionHandler = new EventHandler<CollisionHappenedEvent>();
 
     // Start is called before the first frame update
@@ -22,16 +21,9 @@ public class ParticleManager : MonoBehaviour
     {
         if (@event.CollidedWith.GetComponent<Ground>() && @event.Object.GetComponent<MainCharacter>())
         {
-            if (_fisrtGroundCollisionHappened)
-            {
-                var position = new Vector3(@event.Object.transform.position.x, @event.CollidedWith.transform.position.y,
-                    @event.Object.transform.position.z - 0.1f);
-                Instantiate(GroundDustParticles, position, Quaternion.identity);
-            }
-            else
-            {
-                _fisrtGroundCollisionHappened = true;
-            }
+            var position = new Vector3(@event.Object.transform.position.x, @event.CollidedWith.transform.position.y,
+                @event.Object.transform.position.z - 0.1f);
+            Instantiate(GroundDustParticles, position, Quaternion.identity);
         }
 
         if (@event.CollidedWith.GetComponent<Valuable>() != null && @event.Object.GetComponent<MainCharacter>())
