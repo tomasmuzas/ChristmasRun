@@ -25,6 +25,9 @@ public class CanvasManager : MonoBehaviour
     public Text CountDownText;
     private bool gameStarted;
     public GameObject GameOverPanel;
+    public Text TutorialText;
+    public float TutorialSpeed;
+    private Vector3 direction;
 
     private readonly EventHandler<GiftCollectedEvent> _giftHandler = new EventHandler<GiftCollectedEvent>();
     private readonly EventHandler<GameOverEvent> _gameOverHandler = new EventHandler<GameOverEvent>();
@@ -38,6 +41,12 @@ public class CanvasManager : MonoBehaviour
         _gameOverHandler.EventAction += HandleGameOver;
         _highScore = PlayerPrefs.GetInt("highscore", _highScore);
         _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
+        if (PlayerPrefs.GetInt("tutorialshown", 0) == 0)
+        {
+            StartCoroutine(ShowTutorialText());
+            PlayerPrefs.SetInt("tutorialshown", 1);
+        }
+        
         //StartCoroutine(AddPoints());
     }
 
@@ -117,6 +126,17 @@ public class CanvasManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         HighScoreText.enabled = false;
         _highScoreReached = true;
+    }
+
+    IEnumerator ShowTutorialText()
+    {
+        TutorialText.text = "Swipe right to go right";
+        yield return new WaitForSeconds(1f);
+        TutorialText.text = "Swipe up to jump";
+        yield return new WaitForSeconds(1f);
+        TutorialText.text = "Swipe left to go left";
+        yield return new WaitForSeconds(1f);
+        TutorialText.enabled = false;
     }
 
     IEnumerator AddPoints()
