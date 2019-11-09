@@ -4,6 +4,7 @@ using Assets.Scripts.Events;
 using UnityEngine;
 using Text = TMPro.TextMeshProUGUI;
 
+
 public class CanvasManager : MonoBehaviour
 {
     private int _points;
@@ -130,11 +131,21 @@ public class CanvasManager : MonoBehaviour
 
     IEnumerator ShowTutorialText()
     {
+        yield return new WaitForSeconds(0.2f);
         TutorialText.text = "Swipe right to go right";
+        LeanTween.moveLocalX(TutorialText.gameObject, 70f, 0.5f);
         yield return new WaitForSeconds(1f);
-        TutorialText.text = "Swipe up to jump";
-        yield return new WaitForSeconds(1f);
+        TutorialText.enabled = false;
+        yield return new WaitForSeconds(0.2f);
         TutorialText.text = "Swipe left to go left";
+        TutorialText.enabled = true;
+        LeanTween.moveLocalX(TutorialText.gameObject, 3f, 0.5f);
+        yield return new WaitForSeconds(1f);
+        TutorialText.enabled = false;
+        yield return new WaitForSeconds(0.2f);
+        TutorialText.text = "Swipe up to jump";
+        TutorialText.enabled = true;
+        LeanTween.moveLocalY(TutorialText.gameObject, -150f, 0.5f);
         yield return new WaitForSeconds(1f);
         TutorialText.enabled = false;
     }
