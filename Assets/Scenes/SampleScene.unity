@@ -2537,7 +2537,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Swipe right to go right
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dfb72c360ced7ec4d82a20c39054549c, type: 2}
   m_sharedMaterial: {fileID: 8437788745092363682, guid: dfb72c360ced7ec4d82a20c39054549c,
@@ -2583,7 +2583,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 15
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2607,13 +2607,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 865977616}
-    characterCount: 23
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 2
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -8782,6 +8782,8 @@ MonoBehaviour:
   countDown: 5
   CountDownText: {fileID: 1396983167}
   GameOverPanel: {fileID: 1306285448}
+  TutorialText: {fileID: 865977616}
+  TutorialSpeed: 0
 --- !u!1 &1161032693
 GameObject:
   m_ObjectHideFlags: 0
