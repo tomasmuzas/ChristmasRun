@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null) { Instance = this; }
 
         var currentSkinName = PlayerPrefs.GetString("equipped_skin_name", "Boy");
-        var currentSkin = Skins.Single(s => s.Name == currentSkinName);
+        var currentSkin = Skins.SingleOrDefault(s => s.Name == currentSkinName) ?? Skins.Single(s => s.Name == "Boy");
         MainCharacter = Instantiate(
             currentSkin.Prefab, 
             new Vector3(0f, 1.19f, 0f),
