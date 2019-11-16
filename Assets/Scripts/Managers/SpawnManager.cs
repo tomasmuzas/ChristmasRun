@@ -2,11 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Behaviour;
+using Assets.Scripts.EventHandling;
+using Assets.Scripts.Events;
 using UnityEngine;
 using Random = System.Random;
 
 namespace Assets.Scripts.Managers
 {
+    public enum SpawnableGroup
+    {
+        Valuable,
+        Obstacle
+    }
+
+    public enum SpawnType
+    {
+        Probabilistic,
+        NonProbabilistic
+    }
+
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField]
@@ -14,21 +28,21 @@ namespace Assets.Scripts.Managers
         [SerializeField]
         public List<GameObject> HousePrefabs;
 
-        public static float SpawnSpeed => InitialSpawnSpeed / GameManager.GameSpeed;
-        public static float InitialSpawnSpeed = 0.7f;
-
-        private static readonly Random Rnd = new Random();
         public static SpawnManager Instance { get; private set; } // static singleton
 
-        private List<Spawnable> valuableSpawnables;
-        private List<Spawnable> obstacleSpawnables;
-        private Lane _valuableLane;
+        private static List<Spawnable> valuableSpawnables;
+        private static List<Spawnable> obstacleSpawnables;
+
+        private static readonly Random Rnd = new Random();
+
+        public ISpawnStrategy spawnStrategy;
+
+        private EventHandler<TutorialFinishedEvent> tutorialEventHandler = null;
 
         void Awake()
         {
             if (Instance == null) { Instance = this; }
 
-            _valuableLane = Lane.Middle;
             valuableSpawnables = SpawnablePrefabs
                 .Where(s => s.GetComponent<Valuable>() != null || s.GetComponent<PowerUpPickup>() != null)
                 .OrderBy(s => s.SpawnChance)
@@ -37,6 +51,18 @@ namespace Assets.Scripts.Managers
                 .Where(s => s.GetComponent<Destructable>() != null)
                 .OrderBy(s => s.SpawnChance)
                 .ToList();
+
+
+            if (PlayerPrefs.GetInt("tutorialshown", 0) == 0)
+            {
+                spawnStrategy = CreateSpawnStrategy<TutorialSpawnStrategy>();
+                tutorialEventHandler = new EventHandler<TutorialFinishedEvent>();
+                tutorialEventHandler.EventAction += HandleTutorialFinished;
+            }
+            else
+            {
+                spawnStrategy = CreateSpawnStrategy<MainSpawnStrategy>();
+            }
         }
 
         void Start()
@@ -44,29 +70,29 @@ namespace Assets.Scripts.Managers
             StartCoroutine(SpawnHouses());
         }
 
-        private IEnumerator SpawnLane(Lane lane)
+        private void HandleTutorialFinished(IEvent @event)
         {
-            if (SpawnablePrefabs?.Count == 0)
-            {
-                yield break;
-            }
-
-            while (GameManager.Instance.GameRunning)
-            {
-                var spawnable = PickSpawnableBasedOnChance(lane == _valuableLane ? valuableSpawnables : obstacleSpawnables);
-
-                if (spawnable != null)
-                {
-                    var spawnPosition = spawnable.SpawnPositions.Single(p => p.Lane == lane);
-                    Instantiate(spawnable, spawnPosition.Position, spawnable.transform.rotation);
-                }
-
-                yield return new WaitForSeconds(lane == _valuableLane ? SpawnSpeed : 1/SpawnSpeed);
-            }
+            PlayerPrefs.SetInt("tutorialshown", 1);
+            spawnStrategy = CreateSpawnStrategy<MainSpawnStrategy>();
+            spawnStrategy.StartSpawning();
         }
 
-        private Spawnable PickSpawnableBasedOnChance(List<Spawnable> possibleSpawnables)
+        private ISpawnStrategy CreateSpawnStrategy<T>() where T: MonoBehaviour, ISpawnStrategy
         {
+            // This is a very shady method. In order to use Coroutines, we need to have MonoBehaviour
+            // MonoBehaviour can only be initialized properly via GameObject methods.
+            // We are adding a component of the strategy, then getting it again...
+            return new GameObject(typeof(T).Name).AddComponent<T>().GetComponent<T>();
+        }
+
+        public static Spawnable PickSpawnableBasedOnChance(SpawnableGroup spawnableGroup, SpawnType spawnType = SpawnType.Probabilistic)
+        {
+            var possibleSpawnables = spawnableGroup == SpawnableGroup.Valuable ? valuableSpawnables : obstacleSpawnables;
+            if (spawnType == SpawnType.NonProbabilistic)
+            {
+                return possibleSpawnables[Rnd.Next(0, possibleSpawnables.Count)];
+            }
+
             var randomNumber = Rnd.NextDouble();
 
             var cumulative = 0.0;
@@ -82,6 +108,15 @@ namespace Assets.Scripts.Managers
             return null;
         }
 
+        public static void SpawnItem(Lane lane, Spawnable spawnable)
+        {
+            if (spawnable != null)
+            {
+                var spawnPosition = spawnable.SpawnPositions.Single(p => p.Lane == lane);
+                Instantiate(spawnable, spawnPosition.Position, spawnable.transform.rotation);
+            }
+        }
+
         private IEnumerator SpawnHouses()
         {
             while (GameManager.Instance.GameRunning)
@@ -94,24 +129,6 @@ namespace Assets.Scripts.Managers
                     house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
                     Instantiate(house, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
                 }
-            }
-        }
-
-        public void StartSpawning()
-        {
-            StartCoroutine(SpawnLane(Lane.Left));
-            StartCoroutine(SpawnLane(Lane.Middle));
-            StartCoroutine(SpawnLane(Lane.Right));
-            StartCoroutine(ChangeValuableLane());
-        }
-
-        private IEnumerator ChangeValuableLane()
-        {
-            while (GameManager.Instance.GameRunning)
-            {
-                _valuableLane = (Lane)Rnd.Next(0, 2 + 1);
-                Debug.Log(_valuableLane);
-                yield return new WaitForSeconds(3 / GameManager.GameSpeed);
             }
         }
     }

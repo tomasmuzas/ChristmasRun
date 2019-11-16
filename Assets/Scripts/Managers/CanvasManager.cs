@@ -15,7 +15,7 @@ public class CanvasManager : MonoBehaviour
     public Text HighScoreText;
     private int _totalGifts;
     public Text GiftsTotalText;
-    private bool _highScoreReached;
+    private bool _highScoreWasShown;
     public Text AddGiftsText;
     private bool _showAddGiftsText;
     private int _addGiftsCount;
@@ -27,11 +27,16 @@ public class CanvasManager : MonoBehaviour
     private bool gameStarted;
     public GameObject GameOverPanel;
     public Text TutorialText;
-    public float TutorialSpeed;
-    private Vector3 direction;
 
     private readonly EventHandler<GiftCollectedEvent> _giftHandler = new EventHandler<GiftCollectedEvent>();
     private readonly EventHandler<GameOverEvent> _gameOverHandler = new EventHandler<GameOverEvent>();
+
+    public static CanvasManager Instance { get; private set; } // static singleton
+
+    public void Awake()
+    {
+        Instance = this;
+    }
 
     public void Start()
     {
@@ -42,13 +47,6 @@ public class CanvasManager : MonoBehaviour
         _gameOverHandler.EventAction += HandleGameOver;
         _highScore = PlayerPrefs.GetInt("highscore", _highScore);
         _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
-        if (PlayerPrefs.GetInt("tutorialshown", 0) == 0)
-        {
-            StartCoroutine(ShowTutorialText());
-            PlayerPrefs.SetInt("tutorialshown", 1);
-        }
-        
-        //StartCoroutine(AddPoints());
     }
 
     void Update()
@@ -95,6 +93,12 @@ public class CanvasManager : MonoBehaviour
     void HandleGameOver(GameOverEvent @event)
     {
         SetAllGifts();
+        if (_points > PlayerPrefs.GetInt("highscore", 0))
+        {
+            PlayerPrefs.SetInt("highscore", _points);
+            PlayerPrefs.Save();
+        }
+
         GameOverPanel.SetActive(true);
     }
 
@@ -112,11 +116,11 @@ public class CanvasManager : MonoBehaviour
         PointsText.text = _points.ToString();
         if (_points > _highScore)
         {
-            _highScore = _points;
-            PlayerPrefs.SetInt("highscore", _highScore);
-            PlayerPrefs.Save();
-            if (!_highScoreReached)
+            if (!_highScoreWasShown && _highScore != 0)
+            {
+                _highScoreWasShown = true;
                 StartCoroutine("SetHighScoreText");
+            }
         }
     }
 
@@ -126,35 +130,22 @@ public class CanvasManager : MonoBehaviour
         HighScoreText.enabled = true;
         yield return new WaitForSeconds(2f);
         HighScoreText.enabled = false;
-        _highScoreReached = true;
     }
 
-    IEnumerator ShowTutorialText()
+    public void DisplayTutorialText(string text)
     {
-        yield return new WaitForSeconds(0.2f);
-        TutorialText.text = "Swipe right to go right";
-        LeanTween.moveLocalX(TutorialText.gameObject, 70f, 0.5f);
-        yield return new WaitForSeconds(1f);
-        TutorialText.enabled = false;
-        yield return new WaitForSeconds(0.2f);
-        TutorialText.text = "Swipe left to go left";
-        TutorialText.enabled = true;
-        LeanTween.moveLocalX(TutorialText.gameObject, 3f, 0.5f);
-        yield return new WaitForSeconds(1f);
-        TutorialText.enabled = false;
-        yield return new WaitForSeconds(0.2f);
-        TutorialText.text = "Swipe up to jump";
-        TutorialText.enabled = true;
-        LeanTween.moveLocalY(TutorialText.gameObject, -150f, 0.5f);
-        yield return new WaitForSeconds(1f);
-        TutorialText.enabled = false;
+        TutorialText.text = text;
     }
 
     IEnumerator AddPoints()
     {
         while (GameManager.Instance.GameRunning)
         {
-            _points++;
+            if (GameManager.Instance.ShouldCountScore)
+            {
+                _points++;
+            }
+
             yield return new WaitForSeconds(0.1f / GameManager.GameSpeed);
         }
     }

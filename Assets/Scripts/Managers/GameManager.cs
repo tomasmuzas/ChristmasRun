@@ -11,6 +11,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static float _startTime;
+
+    private bool IsTutorial;
+    public bool ShouldCountScore => !IsTutorial && GameRunningAndStarted;
     public static float GameSpeed => (float)(1 + Math.Sqrt((Time.time - _startTime) / 100000));
 
     public GameObject MainCharacter;
@@ -21,15 +24,19 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; } // static singleton
 
     private readonly Assets.Scripts.EventHandling.EventHandler<CollisionHappenedEvent> _collisionHandler = new Assets.Scripts.EventHandling.EventHandler<CollisionHappenedEvent>();
+    private readonly Assets.Scripts.EventHandling.EventHandler<TutorialStartedEvent> _tutorialStartedHandler = new Assets.Scripts.EventHandling.EventHandler<TutorialStartedEvent>();
+    private readonly Assets.Scripts.EventHandling.EventHandler<TutorialFinishedEvent> _tutorialFinishedHandler = new Assets.Scripts.EventHandling.EventHandler<TutorialFinishedEvent>();
 
     public bool GameRunning => Time.timeScale > 0;
-    public bool GameStarted;
+    private bool GameStarted;
     public bool GameRunningAndStarted => GameRunning && GameStarted;
 
     void Awake()
     {
         Time.timeScale = 1;
         _startTime = Time.time;
+        _tutorialStartedHandler.EventAction += e => IsTutorial = true;
+        _tutorialFinishedHandler.EventAction += e => IsTutorial = false;
         if (Instance == null) { Instance = this; }
 
         var currentSkinName = PlayerPrefs.GetString("equipped_skin_name", "Boy");
@@ -49,7 +56,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         GameStarted = true;
-        SpawnManager.Instance.StartSpawning();
+        SpawnManager.Instance.spawnStrategy.StartSpawning();
     }
 
     public void OpenSkinStore()
@@ -60,7 +67,7 @@ public class GameManager : MonoBehaviour
     //Used for diplaying framerate
     void OnGUI()
     {
-        GUI.Label(new Rect(0f, 0f, 100f, 100f), (1.0f / Time.smoothDeltaTime).ToString());
+        GUI.Label(new Rect(30f, 30f, 100f, 100f), (1.0f / Time.smoothDeltaTime).ToString());
     }
 
     private void HandleCollisionHappened(CollisionHappenedEvent @event)
@@ -91,5 +98,11 @@ public class GameManager : MonoBehaviour
     {
         EventManager.DisposeAllHandlers();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ResetGameState()
+    {
+        PlayerPrefs.DeleteAll();
+        RestartGame();
     }
 }

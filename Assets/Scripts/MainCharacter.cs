@@ -36,12 +36,14 @@ public class MainCharacter : MonoBehaviour
             _rigidbody.velocity = new Vector3(MovementDelta / MovementTime, 0, 0);
             _lane++;
             StartCoroutine(StopSlide());
+            EventManager.PublishEvent(new PlayerMovedRightEvent());
         }
         if ((Input.GetKeyDown("left") || Swipe.SwipeLeft) && _lane != Lane.Left && !_jumping && !_sliding)
         {
             _rigidbody.velocity = new Vector3(-MovementDelta / MovementTime, 0, 0);
             _lane--;
             StartCoroutine(StopSlide());
+            EventManager.PublishEvent(new PlayerMovedLeftEvent());
         }
         if ((Input.GetKeyDown("up") || Swipe.SwipeUp) && !_jumping && !_sliding)
         {

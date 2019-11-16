@@ -24,7 +24,7 @@ namespace Assets.Scripts.Managers
         {
             _totalGifts = PlayerPrefs.GetInt("totalgifts", 0);
             var currentSkinName = PlayerPrefs.GetString("equipped_skin_name", "Boy");
-            equippedSkin = Skins.Single(s => s.Name == currentSkinName);
+            equippedSkin = Skins.SingleOrDefault(s => s.Name == currentSkinName) ?? Skins.Single(s => s.Name == "Boy");
 
             GiftsTotal.text = _totalGifts.ToString();
 
