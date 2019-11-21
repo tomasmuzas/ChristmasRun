@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     public void OpenSkinStore()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     //Used for diplaying framerate
