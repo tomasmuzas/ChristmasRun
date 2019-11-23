@@ -7,7 +7,8 @@ namespace Assets.Scripts.Managers
     {
         public void StartGame()
         {
-            SceneManager.LoadScene(1);
+            EventManager.DisposeAllHandlers();
+            SceneManager.LoadScene(SceneIndexes.Game);
         }
     }
 }

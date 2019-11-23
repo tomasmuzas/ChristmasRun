@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
         _tutorialFinishedHandler.EventAction += e => IsTutorial = false;
         if (Instance == null) { Instance = this; }
 
-        var currentSkinName = PlayerPrefs.GetString("equipped_skin_name", "Boy");
-        var currentSkin = Skins.SingleOrDefault(s => s.Name == currentSkinName) ?? Skins.Single(s => s.Name == "Boy");
+        var currentSkinName = PlayerPrefs.GetString(PlayerPrefKeys.EquippedSkin, SkinNames.Boy);
+        var currentSkin = Skins.SingleOrDefault(s => s.Name == currentSkinName) ?? Skins.Single(s => s.Name == SkinNames.Boy);
         MainCharacter = Instantiate(
             currentSkin.Prefab, 
             new Vector3(0f, 1.19f, 0f),
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     public void OpenSkinStore()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneIndexes.SkinStore);
     }
 
     //Used for diplaying framerate

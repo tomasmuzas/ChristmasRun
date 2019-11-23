@@ -53,7 +53,7 @@ namespace Assets.Scripts.Managers
                 .ToList();
 
 
-            if (PlayerPrefs.GetInt("tutorialshown", 0) == 0)
+            if (PlayerPrefs.GetInt(PlayerPrefKeys.Tutorial, 0) == 0)
             {
                 spawnStrategy = CreateSpawnStrategy<TutorialSpawnStrategy>();
                 tutorialEventHandler = new EventHandler<TutorialFinishedEvent>();
@@ -72,7 +72,7 @@ namespace Assets.Scripts.Managers
 
         private void HandleTutorialFinished(IEvent @event)
         {
-            PlayerPrefs.SetInt("tutorialshown", 1);
+            PlayerPrefs.SetInt(PlayerPrefKeys.Tutorial, 1);
             spawnStrategy = CreateSpawnStrategy<MainSpawnStrategy>();
             spawnStrategy.StartSpawning();
         }

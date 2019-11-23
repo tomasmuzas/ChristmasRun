@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Assets.Scripts;
 using Assets.Scripts.EventHandling;
 using Assets.Scripts.Events;
 using UnityEngine;
@@ -45,8 +46,8 @@ public class CanvasManager : MonoBehaviour
         AddGiftsText.transform.localScale = Vector3.zero;
         _giftHandler.EventAction += HandleGiftCollected;
         _gameOverHandler.EventAction += HandleGameOver;
-        _highScore = PlayerPrefs.GetInt("highscore", _highScore);
-        _totalGifts = PlayerPrefs.GetInt("totalgifts", _totalGifts);
+        _highScore = PlayerPrefs.GetInt(PlayerPrefKeys.HighScore, _highScore);
+        _totalGifts = PlayerPrefs.GetInt(PlayerPrefKeys.TotalGifts, _totalGifts);
     }
 
     void Update()
@@ -93,9 +94,9 @@ public class CanvasManager : MonoBehaviour
     void HandleGameOver(GameOverEvent @event)
     {
         SetAllGifts();
-        if (_points > PlayerPrefs.GetInt("highscore", 0))
+        if (_points > PlayerPrefs.GetInt(PlayerPrefKeys.HighScore, 0))
         {
-            PlayerPrefs.SetInt("highscore", _points);
+            PlayerPrefs.SetInt(PlayerPrefKeys.HighScore, _points);
             PlayerPrefs.Save();
         }
 
@@ -119,7 +120,7 @@ public class CanvasManager : MonoBehaviour
             if (!_highScoreWasShown && _highScore != 0)
             {
                 _highScoreWasShown = true;
-                StartCoroutine("SetHighScoreText");
+                StartCoroutine(nameof(SetHighScoreText));
             }
         }
     }
@@ -153,7 +154,7 @@ public class CanvasManager : MonoBehaviour
     void SetAllGifts()
     {
         _totalGifts += _gifts;
-        PlayerPrefs.SetInt("totalgifts", _totalGifts);
+        PlayerPrefs.SetInt(PlayerPrefKeys.TotalGifts, _totalGifts);
         GiftsTotalText.text = $"Total gifts: {_totalGifts}";
     }
 }
