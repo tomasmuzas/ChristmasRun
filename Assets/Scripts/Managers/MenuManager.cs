@@ -10,5 +10,10 @@ namespace Assets.Scripts.Managers
             EventManager.DisposeAllHandlers();
             SceneManager.LoadScene(SceneIndexes.Game);
         }
+
+	public void ExitGame() 
+	{
+ 	    Application.Quit ();
+ 	}
     }
 }
