@@ -6,7 +6,6 @@ using Assets.Scripts.Behaviour;
 using Assets.Scripts.Events;
 using Assets.Scripts.Managers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -59,11 +58,6 @@ public class GameManager : MonoBehaviour
         SpawnManager.Instance.spawnStrategy.StartSpawning();
     }
 
-    public void OpenSkinStore()
-    {
-        SceneManager.LoadScene(SceneIndexes.SkinStore);
-    }
-
     //Used for diplaying framerate
     void OnGUI()
     {
@@ -92,17 +86,5 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             GameStarted = false;
         }
-    }
-
-    public void RestartGame()
-    {
-        EventManager.DisposeAllHandlers();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void ResetGameState()
-    {
-        PlayerPrefs.DeleteAll();
-        RestartGame();
     }
 }

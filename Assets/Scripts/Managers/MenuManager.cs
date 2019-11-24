@@ -16,14 +16,25 @@ namespace Assets.Scripts.Managers
     	    SceneManager.LoadScene(SceneIndexes.Credits);
     	}
 
-        public void LoadMenu()
+        public void OpenMenu()
         {
             SceneManager.LoadScene(SceneIndexes.Menu);
         }
 
-	    public void ExitGame() 
+        public void OpenSkinStore()
+        {
+            SceneManager.LoadScene(SceneIndexes.SkinStore);
+        }
+
+        public void ExitGame() 
 	    {
  	        Application.Quit ();
  	    }
+
+        public void ResetGameState()
+        {
+            PlayerPrefs.DeleteAll();
+            StartGame();
+        }
     }
 }
