@@ -5,6 +5,7 @@
         public const int Menu = 0;
         public const int Game = 1;
         public const int SkinStore = 2;
+	public const int Credits = 3;
     }
 
     public class SkinNames
