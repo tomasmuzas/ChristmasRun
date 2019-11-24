@@ -527,7 +527,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 728598745}
-        m_MethodName: LoadMenu
+        m_MethodName: OpenMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -878,7 +878,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Team members:\n\nMartynas Talalas\nTomas Muzas\nSarune Urvikyte\nMarius
-    Kurbakovas\nValentinas Esvovicius\n\nGraphics:\n\nwww.assetstore.unity.com\r\nwww.textures.com\r\nwww.cgtrader.com\r\nwww.sketchfab.com\r\nwww.turbosquid.com\r\nwww.ocias.com\r\nwww.free3d.com\r\nwww.clipart.email\r\nwww.kissclipart.com\r\n\r\nSounds:\r\n\nwww.freemusicarchive.org\r\nwww.freesound.org\n"
+    Kurbakovas\nValentinas Esvovicius\n\nGraphics:\n\nwww.assetstore.unity.com\r\nwww.textures.com\r\nwww.cgtrader.com\r\nwww.sketchfab.com\r\nwww.turbosquid.com\r\nwww.ocias.com\r\nwww.free3d.com\r\nwww.clipart.email\r\nwww.kissclipart.com\r\n\nUI
+    Design:\nSarune Urvikyte\n\r\nSounds:\r\n\nwww.freemusicarchive.org\r\nwww.freesound.org\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dfb72c360ced7ec4d82a20c39054549c, type: 2}
   m_sharedMaterial: {fileID: 8437788745092363682, guid: dfb72c360ced7ec4d82a20c39054549c,
@@ -924,7 +925,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 323
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -948,12 +949,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 16.38889, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1515246802}
-    characterCount: 340
+    characterCount: 368
     spriteCount: 0
-    spaceCount: 30
-    wordCount: 48
+    spaceCount: 35
+    wordCount: 52
     linkCount: 0
-    lineCount: 24
+    lineCount: 27
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
