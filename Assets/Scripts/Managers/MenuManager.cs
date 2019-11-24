@@ -16,9 +16,14 @@ namespace Assets.Scripts.Managers
     	    SceneManager.LoadScene(SceneIndexes.Credits);
     	}
 
-	public void ExitGame() 
-	{
- 	    Application.Quit ();
- 	}
+        public void LoadMenu()
+        {
+            SceneManager.LoadScene(SceneIndexes.Menu);
+        }
+
+	    public void ExitGame() 
+	    {
+ 	        Application.Quit ();
+ 	    }
     }
 }
