@@ -121,13 +121,13 @@ namespace Assets.Scripts.Managers
         {
             while (GameManager.Instance.GameRunning)
             {
-                yield return new WaitForSeconds(0.8f / (GameManager.GameSpeed * 100));
+                yield return new WaitForSeconds(1 / GameManager.GameSpeed);
                 if (HousePrefabs?.Count > 0)
                 {
                     var house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
-                    Instantiate(house, new Vector3(-1.204675f, 1.139f, 4.5501f), Quaternion.Euler(0f, 13.479f, 0f));
+                    Instantiate(house, new Vector3(-1.41f, 0.362f, 4.61f), Quaternion.Euler(0f, 103.3f, 0f));
                     house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
-                    Instantiate(house, new Vector3(1.23f, 1.139f, 4.91f), Quaternion.Euler(0f, 160f, 0f));
+                    Instantiate(house, new Vector3(1.193f, 0.362f, 4.342001f), Quaternion.Euler(0f, 257.97f, 0f));
                 }
             }
         }
