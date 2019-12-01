@@ -9,33 +9,34 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static float _startTime;
-
-    private bool IsTutorial;
-    public bool ShouldCountScore => !IsTutorial && GameRunningAndStarted;
-    public static float GameSpeed => (float)(1 + Math.Sqrt((Time.time - _startTime) / 100000));
-
-    public GameObject MainCharacter;
-
-    [SerializeField]
-    public List<Skin> Skins;
-    
-    public static GameManager Instance { get; private set; } // static singleton
+    private float _startTime;
+    private bool _isTutorial;
+    private bool _gameStarted;
 
     private readonly Assets.Scripts.EventHandling.EventHandler<CollisionHappenedEvent> _collisionHandler = new Assets.Scripts.EventHandling.EventHandler<CollisionHappenedEvent>();
     private readonly Assets.Scripts.EventHandling.EventHandler<TutorialStartedEvent> _tutorialStartedHandler = new Assets.Scripts.EventHandling.EventHandler<TutorialStartedEvent>();
     private readonly Assets.Scripts.EventHandling.EventHandler<TutorialFinishedEvent> _tutorialFinishedHandler = new Assets.Scripts.EventHandling.EventHandler<TutorialFinishedEvent>();
 
+    public GameObject MainCharacter;
+    [SerializeField]
+    public List<Skin> Skins;
+    public float GameSpeedModifier;
+
+    public bool ShouldCountScore => !_isTutorial && GameRunningAndStarted;
+    public float GameSpeed => GameSpeedModifier * (Time.time - _startTime) + 1;
+    
+    public static GameManager Instance { get; private set; } // static singleton
+
     public bool GameRunning => Time.timeScale > 0;
-    private bool GameStarted;
-    public bool GameRunningAndStarted => GameRunning && GameStarted;
+    
+    public bool GameRunningAndStarted => GameRunning && _gameStarted;
 
     void Awake()
     {
         Time.timeScale = 1;
         _startTime = Time.time;
-        _tutorialStartedHandler.EventAction += e => IsTutorial = true;
-        _tutorialFinishedHandler.EventAction += e => IsTutorial = false;
+        _tutorialStartedHandler.EventAction += e => _isTutorial = true;
+        _tutorialFinishedHandler.EventAction += e => _isTutorial = false;
         if (Instance == null) { Instance = this; }
 
         var currentSkinName = PlayerPrefs.GetString(PlayerPrefKeys.EquippedSkin, SkinNames.Boy);
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        GameStarted = true;
+        _gameStarted = true;
         SpawnManager.Instance.spawnStrategy.StartSpawning();
     }
 
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour
         {
             EventManager.PublishEvent(new GameOverEvent());
             Time.timeScale = 0;
-            GameStarted = false;
+            _gameStarted = false;
         }
     }
 }

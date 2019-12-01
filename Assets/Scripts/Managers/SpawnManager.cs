@@ -121,7 +121,7 @@ namespace Assets.Scripts.Managers
         {
             while (GameManager.Instance.GameRunning)
             {
-                yield return new WaitForSeconds(1 / GameManager.GameSpeed);
+                yield return new WaitForSeconds(1 / GameManager.Instance.GameSpeed);
                 if (HousePrefabs?.Count > 0)
                 {
                     var house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];

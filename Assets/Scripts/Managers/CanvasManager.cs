@@ -147,7 +147,7 @@ public class CanvasManager : MonoBehaviour
                 _points++;
             }
 
-            yield return new WaitForSeconds(0.1f / GameManager.GameSpeed);
+            yield return new WaitForSeconds(0.1f / GameManager.Instance.GameSpeed);
         }
     }
 

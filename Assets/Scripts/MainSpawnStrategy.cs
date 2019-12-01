@@ -14,7 +14,7 @@ namespace Assets.Scripts
         private Lane _valuableLane = Lane.Middle;
         private static readonly Random Rnd = new Random();
 
-        public static float SpawnSpeed => InitialSpawnSpeed / GameManager.GameSpeed;
+        public static float SpawnSpeed => InitialSpawnSpeed / GameManager.Instance.GameSpeed;
         public static float InitialSpawnSpeed = 0.7f;
 
         public void StartSpawning()
@@ -31,7 +31,7 @@ namespace Assets.Scripts
             while (GameManager.Instance.GameRunning)
             {
                 _valuableLane = (Lane)Rnd.Next(0, 2 + 1);
-                yield return new WaitForSeconds(3 / GameManager.GameSpeed);
+                yield return new WaitForSeconds(3 / GameManager.Instance.GameSpeed);
             }
         }
 

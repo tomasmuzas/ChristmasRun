@@ -13,7 +13,7 @@ namespace Assets.Scripts
 
         void Update()
         {
-            animator.SetFloat("GameSpeed", GameManager.GameSpeed);
+            animator.SetFloat("GameSpeed", GameManager.Instance.GameSpeed);
         }
 
     }

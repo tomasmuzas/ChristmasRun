@@ -32,7 +32,7 @@ public class FadeIn : MonoBehaviour
         {
             color.a = f;
             _renderer.material.color = color;
-            yield return new WaitForSeconds(0.00001f / GameManager.GameSpeed);
+            yield return new WaitForSeconds(0.00001f / GameManager.Instance.GameSpeed);
         }
     }
 }

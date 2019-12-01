@@ -2,7 +2,6 @@
 
 public class Ground : MonoBehaviour
 {
-    public float SpeedMultiplier = 1;
     private Material material;
 
     // Start is called before the first frame update
@@ -16,7 +15,7 @@ public class Ground : MonoBehaviour
     {
         if (GameManager.Instance.GameRunningAndStarted)
         {
-            material.mainTextureOffset += new Vector2(0, -GameManager.GameSpeed * SpeedMultiplier);
+            material.mainTextureOffset += new Vector2(0, -(GameManager.Instance.GameSpeed * Time.deltaTime));
         }
     }
 }

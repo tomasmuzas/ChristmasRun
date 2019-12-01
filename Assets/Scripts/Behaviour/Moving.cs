@@ -16,7 +16,7 @@ namespace Assets.Scripts.Behaviour
         {
             if (GameManager.Instance.GameRunningAndStarted)
             {
-                _body.velocity = new Vector3(_body.velocity.x, _body.velocity.y, -GameManager.GameSpeed);
+                _body.velocity = new Vector3(_body.velocity.x, _body.velocity.y, -GameManager.Instance.GameSpeed);
             }
         }
     }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MovingNoRigidbody : MonoBehaviour
 {
-    private float _velocity;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -14,10 +12,9 @@ public class MovingNoRigidbody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _velocity = -GameManager.GameSpeed;
         if (GameManager.Instance.GameRunningAndStarted)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + _velocity * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - GameManager.Instance.GameSpeed * Time.deltaTime);
         }
     }
 }
