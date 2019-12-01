@@ -119,15 +119,16 @@ namespace Assets.Scripts.Managers
 
         private IEnumerator SpawnHouses()
         {
+            yield return new WaitForSeconds(5);
             while (GameManager.Instance.GameRunning)
             {
-                yield return new WaitForSeconds(1 / GameManager.Instance.GameSpeed);
+                yield return new WaitForSeconds(1.4f / GameManager.Instance.GameSpeed);
                 if (HousePrefabs?.Count > 0)
                 {
                     var house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
-                    Instantiate(house, new Vector3(-1.41f, 0.362f, 4.61f), Quaternion.Euler(0f, 103.3f, 0f));
+                    Instantiate(house, new Vector3(-1.2f, 0.362f, 4.61f), Quaternion.Euler(0f, 103.3f, 0f));
                     house = HousePrefabs[Rnd.Next(0, HousePrefabs.Count)];
-                    Instantiate(house, new Vector3(1.193f, 0.362f, 4.342001f), Quaternion.Euler(0f, 257.97f, 0f));
+                    Instantiate(house, new Vector3(1.2f, 0.362f, 4.342001f), Quaternion.Euler(0f, 257.97f, 0f));
                 }
             }
         }
