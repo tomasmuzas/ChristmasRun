@@ -57,6 +57,7 @@ namespace Assets.Scripts.Managers
             var actionButton = actionButtonParent.GetComponent<Button>();
             var actionButtonText = actionButton.GetComponentInChildren<Text>();
 
+            actionButtonText.color = Color.white;
             actionButton.interactable = true;
             var buttonClickedEvent = new Button.ButtonClickedEvent();
             
@@ -71,6 +72,7 @@ namespace Assets.Scripts.Managers
                 if (skin.Price > _totalGifts)
                 {
                     actionButton.interactable = false;
+                    actionButtonText.color = Color.gray;
                     buttonClickedEvent.RemoveAllListeners();
                 }
                 else
