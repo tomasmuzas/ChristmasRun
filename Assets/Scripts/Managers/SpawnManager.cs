@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Behaviour;
@@ -9,10 +10,12 @@ using Random = System.Random;
 
 namespace Assets.Scripts.Managers
 {
+    [Flags]
     public enum SpawnableGroup
     {
-        Valuable,
-        Obstacle
+        Valuable = 1,
+        Obstacle = 2,
+        PowerUp = 4
     }
 
     public enum SpawnType
@@ -32,31 +35,33 @@ namespace Assets.Scripts.Managers
 
         private static List<Spawnable> valuableSpawnables;
         private static List<Spawnable> obstacleSpawnables;
+        private static List<Spawnable> powerupSpawnables;
 
         private static readonly Random Rnd = new Random();
 
         public ISpawnStrategy spawnStrategy;
 
-        private EventHandler<TutorialFinishedEvent> tutorialEventHandler = null;
+        private EventHandling.EventHandler<TutorialFinishedEvent> tutorialEventHandler = null;
 
         void Awake()
         {
             if (Instance == null) { Instance = this; }
 
             valuableSpawnables = SpawnablePrefabs
-                .Where(s => s.GetComponent<Valuable>() != null || s.GetComponent<PowerUpPickup>() != null)
-                .OrderBy(s => s.SpawnChance)
+                .Where(s => s.GetComponent<Valuable>() != null)
                 .ToList();
             obstacleSpawnables = SpawnablePrefabs
                 .Where(s => s.GetComponent<Destructable>() != null)
-                .OrderBy(s => s.SpawnChance)
+                .ToList();
+            powerupSpawnables = SpawnablePrefabs
+                .Where(s => s.GetComponent<PowerUpPickup>() != null)
                 .ToList();
 
 
             if (PlayerPrefs.GetInt(PlayerPrefKeys.Tutorial, 0) == 0)
             {
                 spawnStrategy = CreateSpawnStrategy<TutorialSpawnStrategy>();
-                tutorialEventHandler = new EventHandler<TutorialFinishedEvent>();
+                tutorialEventHandler = new EventHandling.EventHandler<TutorialFinishedEvent>();
                 tutorialEventHandler.EventAction += HandleTutorialFinished;
             }
             else
@@ -87,7 +92,23 @@ namespace Assets.Scripts.Managers
 
         public static Spawnable PickSpawnableBasedOnChance(SpawnableGroup spawnableGroup, SpawnType spawnType = SpawnType.Probabilistic)
         {
-            var possibleSpawnables = spawnableGroup == SpawnableGroup.Valuable ? valuableSpawnables : obstacleSpawnables;
+            var possibleSpawnables = new List<Spawnable>();
+
+            if (spawnableGroup.HasFlag(SpawnableGroup.Valuable))
+            {
+                possibleSpawnables.AddRange(valuableSpawnables);
+            }
+            if (spawnableGroup.HasFlag(SpawnableGroup.PowerUp))
+            {
+                possibleSpawnables.AddRange(powerupSpawnables);
+            }
+            if (spawnableGroup.HasFlag(SpawnableGroup.Obstacle))
+            {
+                possibleSpawnables.AddRange(obstacleSpawnables);
+            }
+
+            possibleSpawnables = possibleSpawnables.OrderBy(s => s.SpawnChance).ToList();
+
             if (spawnType == SpawnType.NonProbabilistic)
             {
                 return possibleSpawnables[Rnd.Next(0, possibleSpawnables.Count)];

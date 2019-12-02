@@ -39,7 +39,9 @@ namespace Assets.Scripts
         {
             while (GameManager.Instance.GameRunning)
             {
-                var spawnable = SpawnManager.PickSpawnableBasedOnChance(lane == _valuableLane ? SpawnableGroup.Valuable : SpawnableGroup.Obstacle);
+                var spawnable = SpawnManager.PickSpawnableBasedOnChance(lane == _valuableLane ? 
+                    SpawnableGroup.Valuable | SpawnableGroup.PowerUp 
+                    : SpawnableGroup.Obstacle);
                 SpawnManager.SpawnItem(lane, spawnable);
 
                 yield return new WaitForSeconds(lane == _valuableLane ? SpawnSpeed : 1 / SpawnSpeed);
