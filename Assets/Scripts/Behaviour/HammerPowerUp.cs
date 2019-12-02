@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Behaviour;
+using UnityEngine;
 
 public class HammerPowerUp : PowerUpSpawn
 {
@@ -19,12 +20,18 @@ public class HammerPowerUp : PowerUpSpawn
 
     void OnCollisionEnter(Collision other)
     {
-        DestroyGameObject(other.gameObject);
+        if (other.gameObject.GetComponent<Destructable>())
+        {
+            DestroyGameObject(other.gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        DestroyGameObject(other.gameObject);
+        if (other.gameObject.GetComponent<Destructable>())
+        {
+            DestroyGameObject(other.gameObject);
+        }
     }
 
     private void DestroyGameObject(GameObject gameObject)
