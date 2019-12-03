@@ -600,8 +600,8 @@ GameObject:
   - component: {fileID: 5611060204827032658}
   - component: {fileID: 5611060204827032652}
   - component: {fileID: 5611060204827032659}
-  - component: {fileID: 5611060204827032657}
   - component: {fileID: 6312727542447459188}
+  - component: {fileID: -2451999145986774771}
   m_Layer: 0
   m_Name: Deer
   m_TagString: Untagged
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58bb666eee04904497858f74ebfe8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnChance: 0.02
+  SpawnChance: 0.01
   SpawnPositions:
   - Lane: 0
     Position: {x: -0.5, y: 0, z: 3.631}
@@ -689,18 +689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf8681e14eec2143be8028b4587954a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5611060204827032657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4539505901905912652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae16233d43a6944898554ed4f36d951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6312727542447459188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +702,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroySpeed: 8
+--- !u!114 &-2451999145986774771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4539505901905912652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae16233d43a6944898554ed4f36d951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4866054780361845033
 GameObject:
   m_ObjectHideFlags: 0

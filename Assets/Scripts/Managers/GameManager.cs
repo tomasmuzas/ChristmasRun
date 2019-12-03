@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts;
@@ -58,13 +57,6 @@ public class GameManager : MonoBehaviour
         _gameStarted = true;
         SpawnManager.Instance.spawnStrategy.StartSpawning();
     }
-
-    //Used for diplaying framerate
-    void OnGUI()
-    {
-        GUI.Label(new Rect(30f, 30f, 100f, 100f), (1.0f / Time.smoothDeltaTime).ToString());
-    }
-
     private void HandleCollisionHappened(CollisionHappenedEvent @event)
     {
         if (@event.CollidedWith.GetComponent<Valuable>() != null)

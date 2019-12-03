@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58bb666eee04904497858f74ebfe8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnChance: 0.25
+  SpawnChance: 0.1
   SpawnPositions:
   - Lane: 0
     Position: {x: -0.5, y: 0, z: 3.631}

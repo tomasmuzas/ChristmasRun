@@ -30,6 +30,7 @@ public class HammerPowerUp : PowerUpSpawn
     {
         if (other.gameObject.GetComponent<Destructable>())
         {
+            Destroy(other.GetComponent<Collider>());
             DestroyGameObject(other.gameObject);
         }
     }

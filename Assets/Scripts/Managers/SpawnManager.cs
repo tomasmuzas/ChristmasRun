@@ -133,7 +133,8 @@ namespace Assets.Scripts.Managers
         {
             if (spawnable != null)
             {
-                var spawnPosition = spawnable.SpawnPositions.Single(p => p.Lane == lane);
+                var spawnPosition = spawnable.SpawnPositions.SingleOrDefault(p => p.Lane == lane) 
+                                    ?? spawnable.SpawnPositions[Rnd.Next(0, spawnable.SpawnPositions.Count)];
                 Instantiate(spawnable, spawnPosition.Position, spawnable.transform.rotation);
             }
         }

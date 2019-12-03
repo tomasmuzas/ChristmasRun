@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Assets.Scripts.Behaviour;
 using Assets.Scripts.Managers;
 using UnityEngine;
 using Random = System.Random;
@@ -18,8 +15,7 @@ namespace Assets.Scripts
         public static float InitialSpawnSpeed = 0.7f;
 
         public void StartSpawning()
-        { 
-            Console.WriteLine(this);
+        {
             StartCoroutine(SpawnLane(Lane.Left));
             StartCoroutine(SpawnLane(Lane.Middle));
             StartCoroutine(SpawnLane(Lane.Right));
@@ -31,7 +27,8 @@ namespace Assets.Scripts
             while (GameManager.Instance.GameRunning)
             {
                 _valuableLane = (Lane)Rnd.Next(0, 2 + 1);
-                yield return new WaitForSeconds(3 / GameManager.Instance.GameSpeed);
+                Debug.Log("Valuable lane changed to:" + _valuableLane);
+                yield return new WaitForSeconds(3);
             }
         }
 
@@ -44,7 +41,7 @@ namespace Assets.Scripts
                     : SpawnableGroup.Obstacle);
                 SpawnManager.SpawnItem(lane, spawnable);
 
-                yield return new WaitForSeconds(lane == _valuableLane ? SpawnSpeed : 1 / SpawnSpeed);
+                yield return new WaitForSeconds(SpawnSpeed);
             }
         }
     }
