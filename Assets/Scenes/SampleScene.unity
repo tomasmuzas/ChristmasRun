@@ -10344,6 +10344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCharacter: {fileID: 0}
+  santa: {fileID: 7871442869154884353}
   Skins:
   - {fileID: 9168738325600444862, guid: 61cb6d3c14586594498ffee3e5d45c14, type: 3}
   - {fileID: 1680181740441195355, guid: efcefdcc319d52a4ead31ed5d646cd90, type: 3}
