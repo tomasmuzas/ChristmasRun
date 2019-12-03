@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     private readonly Assets.Scripts.EventHandling.EventHandler<TutorialFinishedEvent> _tutorialFinishedHandler = new Assets.Scripts.EventHandling.EventHandler<TutorialFinishedEvent>();
 
     public GameObject MainCharacter;
+    public GameObject santa;
     [SerializeField]
     public List<Skin> Skins;
     public float GameSpeedModifier;
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _collisionHandler.EventAction += HandleCollisionHappened;
+
     }
 
     public void StartGame()
@@ -57,6 +60,15 @@ public class GameManager : MonoBehaviour
         _gameStarted = true;
         SpawnManager.Instance.spawnStrategy.StartSpawning();
     }
+
+    void Update()
+    {
+        if (_gameStarted)
+        {
+            santa.GetComponent<Animator>().speed = Math.Max(1, (float)(0.65 * Instance.GameSpeed));
+        }
+    }
+
     private void HandleCollisionHappened(CollisionHappenedEvent @event)
     {
         if (@event.CollidedWith.GetComponent<Valuable>() != null)
