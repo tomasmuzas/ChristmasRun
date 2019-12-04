@@ -18,7 +18,7 @@
     public class PlayerPrefKeys
     {
         public const string EquippedSkin = "equipped_skin_name";
-        public const string HighScore = "equipped_skin_name";
+        public const string HighScore = "high_score";
         public const string TotalGifts = "totalgifts";
         public const string Tutorial = "tutorialshown";
     }
